@@ -1,0 +1,636 @@
+/* 無限slider */
+#carousel-wrap {
+  position: relative;
+  width: 80%;
+  margin: 20px auto 0;
+}
+
+#controls {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#controls span {
+  cursor: pointer;
+}
+
+#controls span:hover {
+  opacity: 1;
+}
+
+#prev,
+#next {
+  height: 15%;
+  width: 15%;
+  background-color: rgb(219 234 254);
+  display: flex;
+  align-items: center;
+}
+
+#prev {
+  border-radius: 0 35px 35px 0;
+  justify-content: right;
+  padding-right: 10px;
+}
+
+#next {
+  border-radius: 35px 0 0 35px;
+  justify-content: left;
+  padding-left: 10px;
+}
+
+@media screen and (max-width: 769px) {
+
+  #carousel-wrap {
+    width: 90%;
+  }
+
+  #prev,
+  #next {
+    width: 10%;
+  }
+}
+
+/* 人物介紹 */
+.character-wrap {
+  max-width: 80%;
+  margin: 20px auto;
+}
+
+.character-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.character-title-p {
+  padding: 2vw 0 1vw;
+  font-size: 26.4px;
+  font-weight: 600;
+  color: #000;
+}
+
+.character-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.character-pic {
+  text-decoration: none;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.character-pic img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.character-name {
+  color: #000;
+  height: 100%;
+  font-size: 17.5px;
+  font-weight: 600;
+  margin-top: 20px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  .character-title-p {
+    color: #f3f4f6;
+  }
+
+  .character-name {
+    color: #f3f4f6;
+  }
+}
+
+@media screen and (max-width: 955px) {
+
+  .character-wrap {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .character-container {
+    width: 100%;
+    height: 60%;
+    grid-template-columns: repeat(2, 150px);
+    /* grid-template-columns: 50% 50%; */
+    grid-template-rows: repeat(2, 200px);
+    /* grid-template-rows: 50% 50%; */
+    grid-gap: 3vw 5vw;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .character-pic img {
+    width: 100px;
+    height: 100px;
+  }
+
+}
+
+@media screen and (max-width: 426px) {
+
+  .character-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .character-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .character-container {
+    width: 100%;
+    margin: 0px;
+    grid-template-columns: repeat(2, 100px);
+    /* grid-template-columns: 50% 50%; */
+    grid-template-rows: repeat(2, 200px);
+    /* grid-template-rows: 50% 50%; */
+    grid-gap: 0vw 10vw;
+  }
+
+  .character-pic {
+    width: 100px;
+  }
+
+}
+
+.media-studies-wrap {
+  width: 100%;
+  padding: 20px;
+  background: #000;
+  background-image: url("https://i.imgur.com/3O7GIz0.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: space-around;
+  box-sizing: border-box;
+}
+
+/* 左邊文章 */
+.media-studies-wrap-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.media-studies-title {
+  font-size: 42px;
+  font-weight: bold;
+  line-height: 1.66;
+  color: #fff;
+}
+
+.media-studies-sticky {
+  padding: 40px 0;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.media-studies-txt-wrap {
+  font-size: 17px;
+  line-height: 2.23;
+  color: #ff0000;
+}
+
+.media-studies-txt {
+  margin-top: 25px;
+}
+
+.media-studies-more {
+  width: 100%;
+  margin-top: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.media-studies-link {
+  font-size: 30px;
+  color: #fff;
+}
+
+.media-studies-link-img {
+  margin-left: 24px;
+}
+
+/* 右邊圖片 */
+.media-studies-wrap-right {
+  color: #f3f4f6;
+  padding: 40px 0;
+}
+
+.media-studies-wrap-right a {
+  text-decoration: none;
+}
+
+.media-studies-article {
+  margin-bottom: 100px;
+  max-width: 400px;
+}
+
+.media-studies-article img {
+  width: 100%;
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.media-studies-article-title {
+  text-decoration: none;
+}
+
+.media-studies-article-title p {
+  width: 100%;
+  padding: 0 20px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  font-weight: 700;
+  line-height: 1.4;
+  font-size: 24px;
+  text-align: justify;
+}
+
+.media-studies-article-text {
+  width: 100%;
+  overflow: hidden;
+  padding: 0 20px;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+  font-size: 16px;
+  text-align: justify;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.media-studies-controls {
+  display: none;
+}
+
+.media-studies-wrap-right-slider {
+  display: none;
+  color: #f3f4f6;
+  margin: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  .media-studies-article-title {
+    color: #f3f4f6;
+  }
+
+  .media-studies-article-text {
+    color: #f3f4f6;
+  }
+}
+
+@media screen and (max-width: 769px) {
+
+  .media-studies-wrap {
+    flex-direction: column;
+  }
+
+  .media-studies-wrap-left {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .media-studies-more {
+    justify-content: center;
+  }
+
+  /* 右邊圖片 */
+  .media-studies-wrap-right {
+    display: none;
+  }
+
+  .media-studies-wrap-right-slider {
+    display: block;
+    width: 90%;
+    position: relative;
+  }
+  
+  .media-studies-article {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .slick-dots {
+    position: static;
+  }
+
+  .slick-dots li button:before {
+    color: rgb(255, 255, 255);
+    opacity: 1;
+    font-size: large;
+  }
+
+  .slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: rgb(59 130 246);
+  }
+}
+
+/*  主題推薦  */
+.theme-wrap {
+  width: 90%;
+  box-sizing: border-box;
+  margin: 80px auto 0;
+}
+
+.theme-title {
+  margin-bottom: 30px;
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.theme {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.theme-up {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.theme-up p {
+  margin: 15px 10px 15px 0;
+  border: 1px solid black;
+  border-radius: 40px;
+  padding: 10px 20px;
+  background-color: #ffff;
+  font-size: 15px;
+}
+
+.theme-up p:hover {
+  background-color: #05538a;
+  color: #ffff;
+}
+
+.theme-down {
+  background-color: #f3f3f3;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 24px 44px;
+  border-radius: 12px;
+  border: 4px solid #fff;
+}
+
+.theme-down-wrap {
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.theme-pic-wrap {
+  background-color: #f3f3f3;
+  width: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-300px);
+  border-top: #dce3f5 2px solid;
+  border-bottom: #dce3f5 2px solid;
+}
+
+.theme-pic {
+  width: 300px;
+  margin: 15px 15px 15px 0;
+  transition: 1s linear;
+}
+
+.theme-pic img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 769px) {
+
+  .theme-title {
+    font-size: 35px;
+    margin-bottom: 0px;
+  }
+
+  .theme-up p {
+    margin: 13px 8px 13px 0;
+    border-radius: 30px;
+    padding: 5px 15px;
+    background-color: #ffff;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+
+  .theme-title {
+    font-size: 35px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .theme {
+    flex-direction: column;
+  }
+
+  .theme-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2px;
+    margin: 5px 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  .theme-up p {
+    background-color: #253555;
+  }
+
+  .theme-up p:hover {
+    background-color: #2b4779;
+  }
+
+  .theme-down {
+    background-color: #111827;
+    border: 4px solid #253555;
+  }
+
+  .theme-pic-wrap {
+    background-color: #111827;
+    border-top: #253555 2px solid;
+    border-bottom: #253555 2px solid;
+  }
+}
+
+
+
+/* XXX電影精選  */
+.best-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: 80px;
+}
+
+.best {
+  width: 100%;
+  position: relative;
+}
+
+.best-up {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 200px;
+  box-sizing: border-box;
+}
+
+.best-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 30px;
+  line-height: normal;
+}
+
+.best-subtitle {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.best-logline {
+  font-size: 1rem;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.best-down {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 0;
+  height: 500px;
+  width: 100%;
+}
+
+.best-pic-wrap {
+  display: flex;
+  align-items: flex-start;
+  position: absolute;
+  top: 0;
+  padding-top: 200px;
+}
+
+.best-pic {
+  width: 400px;
+  margin-left: 140px;
+  transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.best-pic:hover {
+  transform: translateY(-200px);
+}
+
+.best-pic-wrap img {
+  cursor: pointer;
+  object-fit: cover;
+  filter: drop-shadow(12px 12px 24px rgba(0, 0, 0, .3));
+}
+
+@media screen and (max-width: 768px) {
+
+  .best-wrap {
+    align-items: normal;
+  }
+
+  .best-title p {
+    font-size: 35px;
+  }
+
+  .best-subtitle p {
+    font-size: 25px;
+  }
+
+  .best-logline p {
+    font-size: 12px;
+  }
+
+  .best-down {
+    height: 350px;
+  }
+
+  .best-pic {
+    width: 250px;
+    margin-left: 0;
+  }
+
+  .best-pic:hover {
+    transform: translateY(-200px);
+  }
+
+  .best-pic-wrap img {
+    height: 300px;
+  }
+
+  .best-pic-wrap img:first-child {
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+
+  .best-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  .best-subtitle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  .best-up {
+    padding: 0 20px 100px;
+  }
+}

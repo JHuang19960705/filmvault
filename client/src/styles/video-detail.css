@@ -1,0 +1,317 @@
+.kondo-wrap {
+  width: 100%;
+  margin: auto;
+}
+
+.movie-pic {
+  width: 100%;
+}
+
+.movie-pic img {
+  width: 100%;
+}
+
+.movie-title {
+  width: 80%;
+  height: 100px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.movie-title p {
+  font-size: 100px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1025px) {
+  .movie-title p {
+    font-size: 40px;
+  }
+
+  .movie-title {
+    height: 60px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .movie-title p {
+    font-size: 40px;
+  }
+
+  .movie-title {
+    height: 60px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .movie-title p {
+    font-size: 40px;
+  }
+}
+
+.movie-time {
+  background-color: black;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-time p {
+  font-family: "Noto Serif JP";
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.movie-time p:last-child {
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 1025px) {
+  .movie-time p {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .movie-time p {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .movie-time p {
+    font-size: 25px;
+  }
+}
+
+.movie-detail {
+  height: 150px;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-detail {
+    height: 100%;
+  }
+}
+
+.movie-detail-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 10px 100px;
+}
+
+.movie-detail-wrap div {
+  text-align: center;
+  width: calc((100% - 1px) / 3);
+}
+
+.movie-detail-wrap div p {
+  position: relative;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 130px;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-detail-wrap div p {
+    height: 50px;
+  }
+}
+
+.movie-detail-wrap div:first-child p:after {
+  content: '';
+  width: 5px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background-color: black;
+  margin: auto;
+}
+
+.movie-detail-wrap div p::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 5px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: black;
+  margin: auto;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-detail-wrap {
+    padding: 10px 20px;
+  }
+
+  .fa-solid {
+    font-size: 10px;
+  }
+
+}
+
+/* 影片 */
+.movie-video-and-story {
+  position: relative;
+  width: 100%;
+}
+
+.movie-video-play {
+  width: 100%;
+  cursor: pointer;
+}
+
+.movie-video-play img {
+  width: 100%;
+  background-color: #000;
+}
+
+.movie-videoPlay {
+  width: 100%;
+}
+
+.movie-story {
+  width: 70%;
+  max-height: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+}
+
+.movie-story-wrap {
+  overflow-y: auto;
+}
+
+.movie-story-wrap p {
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+
+@media screen and (max-width: 769px) {
+  .movie-story {
+    padding: 15px;
+  }
+
+  .movie-story-wrap p {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .movie-story {
+    padding: 5px 10px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .movie-video-and-story {
+    color: #1f2937;
+  }
+}
+
+/* 角色介紹 */
+.movie-character {
+  width: 100%;
+  padding: 50px;
+}
+
+.movie-character-title {
+  font-size: 25px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.movie-character-wrap {
+  display: flex;
+}
+
+.movie-character-left {
+  width: 100%;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+}
+
+.movie-character-list1 {
+  display: flex;
+  height: 160px;
+}
+
+.movie-first-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+}
+
+.movie-character-list2 {
+  width: 60px;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+
+.movie-character-list2 img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.movie-character-profile {
+  padding: 10px 20px;
+  margin: auto;
+}
+
+.movie-character-name {
+  font-weight: bold;
+}
+
+.movie-character-real-name {
+  font-size: 12px;
+}
+
+.movie-character-comment {
+  padding-top: 10px;
+  font-size: 1px;
+}
+
+.movie-character-comment p {
+  height: 200px;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .movie-character-left {
+    background-color: #1f2937;
+  }
+}

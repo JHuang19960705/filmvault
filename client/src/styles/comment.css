@@ -1,0 +1,496 @@
+/* 評論系統 */
+.movie-comment-system {
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-comment-system {
+    min-width: 256px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .movie-comment-system {
+    background-color: #1f2937;
+  }
+}
+
+.movie-user {
+  padding: 70px 50px 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 769px) {
+  .movie-user {
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 20px;
+  }
+}
+
+.movie-user-left {
+  width: 35%;
+  position: relative;
+}
+
+.movie-user-left-sticky {
+  position: sticky;
+  top: 50px;
+}
+
+@media screen and (max-width: 769px) {
+  .movie-user-left {
+    width: 100%;
+  }
+
+  .movie-user-left-sticky {
+    position: static;
+  }
+}
+
+/* 評論 */
+.movie-user-thought {
+  display: flex;
+}
+
+.movie-user-thought-title {
+  width: 90%;
+  background-color: #bfd7fe;
+  padding: 20px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border-left: #2570eb 3px solid;
+}
+
+.movie-user-thought-title p {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color: #172e54;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-thought-title p {
+    font-size: 1rem;
+  }
+}
+
+.movie-user-thought-title-trangle {
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+  background-color: #bfd7fe;
+  width: 10%;
+}
+
+/* 使用者頭像、心得標題 */
+.movie-user-title {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 0 0;
+  color: #172e54;
+  width: 100%;
+}
+
+.movie-user-title-pic {
+  width: 30%;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.movie-user-title-pic img {
+  object-fit: cover;
+  clip-path: circle(50% at 50% 50%);
+}
+
+.movie-user-title-line {
+  width: 10%;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.movie-user-title-line-one {
+  height: 1px;
+  background-color: #172e54;
+  transform: rotate(-15deg);
+  margin-bottom: 60px;
+}
+
+.movie-user-title-line-two {
+  height: 1px;
+  background-color: #172e54;
+  transform: rotate(15deg);
+}
+
+.movie-user-title-word {
+  width: 60%;
+  padding-bottom: 20px;
+}
+
+.movie-user-title-word p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #1e478a;
+}
+
+/* 使用者名稱 */
+.movie-user-name {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #1e478a;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (prefers-color-scheme: dark) {
+  .movie-user-title-word p {
+    color: #ffffff;
+  }
+
+  .movie-user-name {
+    color: #ffffff;
+  }
+}
+
+/* 右半邊 */
+.movie-user-right {
+  width: 60%;
+  background-color: #bfd7fe;
+  border-radius: 20px;
+  border: 1px solid #2570eb;
+  padding: 25px;
+}
+
+@media screen and (max-width: 769px) {
+  .movie-user-right {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-right {
+    width: 100%;
+    padding: 15px;
+  }
+}
+
+/* 影評內容 */
+.movie-user-right-content p {
+  color: #172e54;
+  margin-bottom: 6px;
+  word-break: break-all;
+}
+
+.movie-user-like-time {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-like-time {
+    flex-wrap: wrap;
+  }
+}
+
+/* 影評按讚數 */
+.movie-user-like {
+  font-size: 0.7rem;
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-like {
+    width: 50%;
+  }
+}
+
+.movie-user-like-svg {
+  width: 24px;
+  padding-right: 5px;
+}
+
+.movie-user-like-svg:hover {
+  fill: #2570eb;
+  cursor: pointer;
+}
+
+/* 影評撰寫時間 */
+.movie-user-detail {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #1e478a;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-detail {
+    justify-content: flex-start;
+  }
+}
+
+.movie-user-detail-date {
+  font-size: 0.7rem;
+}
+
+.movie-user-detail-time {
+  margin-left: 10px;
+  font-size: 0.7rem;
+}
+
+/* 留言數量 */
+.movie-user-comment-quantity {
+  font-weight: bold;
+}
+
+/* 他人的評論  */
+.movie-user-right-other {
+  padding: 10px 0px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 12% 88%;
+}
+
+.movie-user-right-other-active {
+  background-color: #fff;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .movie-user-right-other {
+    grid-template-columns: 15% 85%;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-right-other {
+    grid-template-columns: 20% 80%;
+  }
+}
+
+.movie-user-right-other-comment-pic {
+  margin-right: 10px
+}
+
+.movie-user-right-other-comment-pic img {
+  object-fit: cover;
+  vertical-align: middle;
+  clip-path: circle(50% at 50% 50%);
+}
+
+.movie-user-right-other-detail {
+  width: 100%;
+}
+
+.movie-user-right-other-detail-user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-user-right-other-detail-user-name {
+  display: flex;
+  align-items: flex-end;
+  width: 70%;
+}
+
+.movie-user-right-other-detail-user-name p {
+  font-size: 0.8rem;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.movie-user-right-other-detail-user-comment {
+  width: 100%;
+  font-size: 0.8rem;
+  word-wrap: break-word;
+}
+
+.movie-user-right-other-detail-date p {
+  margin-left: 5px;
+  font-size: 0.1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-right-other-detail-user {
+    flex-direction: column;
+  }
+
+  .movie-user-right-other-detail-user-name {
+    width: 100%;
+  }
+
+  .movie-user-right-other-detail-user-name p {
+    font-size: 0.4rem;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .movie-user-right-other-detail-user-comment {
+    font-size: 0.4rem;
+  }
+
+  .movie-user-right-other-detail-date p {
+    margin-left: 0px;
+    font-size: 12px;
+  }
+}
+
+/* 編輯刪除 */
+.movie-user-right-other-edit {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  cursor: pointer;
+  position: relative;
+}
+
+.movie-user-right-other-edit-delete {
+  position: absolute;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  bottom: -25px;
+  right: 0px;
+  background-color: #f3f4f6;
+}
+
+/* 待輸入的評論 */
+.movie-user-new-comment {
+  padding-bottom: 20px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 12% 88%;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .movie-user-new-comment {
+    grid-template-columns: 15% 85%;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-new-comment {
+    grid-template-columns: 20% 80%;
+  }
+}
+
+/* 自己的頭像 */
+.movie-user-new-comment-pic {
+  margin-right: 10px
+}
+
+.movie-user-new-comment-pic img {
+  object-fit: cover;
+  vertical-align: middle;
+  clip-path: circle(50% at 50% 50%);
+}
+
+/* 自己的評論輸入 */
+.movie-user-new-comment-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 輸入 */
+.movie-user-new-comment-content input {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 8px;
+  border-bottom: #172e5458 0.25px solid;
+  outline: none;
+  background-color: transparent;
+  color: #172e54;
+  font-size: 16px;
+}
+
+/* 取消、留言 */
+.movie-user-new-comment-content-button {
+  width: 100%;
+  display: flex;
+}
+
+/* 取消、留言 */
+.movie-user-new-comment-content-button-cm {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+/* 取消 */
+.movie-user-new-comment-content-button-cm-cancel {
+  background-color: #f3f4f6;
+  color: rgb(0, 0, 0);
+  opacity: 0.5;
+  padding: .5px 15px;
+  font-size: 12px;
+  border-radius: 18px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* 留言 */
+.movie-user-new-comment-content-button-cm-message {
+  background-color: #2571eb;
+  opacity: 0.5;
+  color: white;
+  padding: .5px 15px;
+  font-size: 12px;
+  border-radius: 18px;
+  margin-left: 18px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.button-active {
+  opacity: 1;
+}
+
+@media screen and (max-width: 426px) {
+  .movie-user-new-comment-content input {
+    font-size: 12px;
+  }
+
+  .movie-user-new-comment-content-button-cm-cancel {
+    padding: 0px 5px;
+  }
+
+  .movie-user-new-comment-content-button-cm-message {
+    padding: 0px 5px;
+  }
+}
