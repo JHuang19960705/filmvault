@@ -5,14 +5,13 @@ import AuthService from "../../../services/auth.service";
 export default function PatchRole({ currentUser, setCurrentUser }) {
   const navigate = useNavigate(); // 使用useNavigate()鉤子來獲取導航功能
 
-  // 處理更改方案功能，根據選擇的方案進行更新
-  const handlePlanChanging = async (e) => {
-    const confirmResult = window.confirm("您確定要修改身分嗎？");
+  // 只處理降級回 free，升級需透過付款流程
+  const handleDowngradeToFree = async () => {
+    const confirmResult = window.confirm("您確定要降級回 Free 方案嗎？");
     if (confirmResult) {
       try {
-        let newRole = e.target.dataset.role; // 獲取選擇的新方案
-        let response = await AuthService.patchRole(currentUser.user._id, newRole);
-        window.alert("身分修改成功。您現在將被導向到個人資料頁面");
+        let response = await AuthService.patchRole(currentUser.user._id, "free");
+        window.alert("已降級回 Free 方案。");
         localStorage.setItem("user", JSON.stringify(response.data));
         setCurrentUser(AuthService.getCurrentUser());
         navigate("/"); // 導航至首頁
@@ -20,6 +19,11 @@ export default function PatchRole({ currentUser, setCurrentUser }) {
         console.error(e); // 處理錯誤，顯示錯誤訊息
       };
     };
+  };
+
+  // 升級方案 → 導向假金流付款頁
+  const handleUpgradeClick = (plan) => {
+    navigate(`/profile/mockPayment?plan=${plan}`);
   };
 
   return (
@@ -42,7 +46,7 @@ export default function PatchRole({ currentUser, setCurrentUser }) {
             <li>瀏覽各種影迷的電影評論。</li>
             <li>對您喜歡的電影評論提供回饋。</li>
           </ul>
-          <button data-role="free" onClick={handlePlanChanging} className="try">選擇Free方案</button>
+          <button onClick={handleDowngradeToFree} className="try">降級回 Free 方案</button>
         </article>
         {/* Standard方案 */}
         <article className="pricing-card">
@@ -56,7 +60,7 @@ export default function PatchRole({ currentUser, setCurrentUser }) {
             <li>建立自己的推薦電影精選列表。</li>
             <li>撰寫電影評論以記錄您的印象和經歷。</li>
           </ul>
-          <button data-role="standard" onClick={handlePlanChanging} className="try">選擇Standard方案</button>
+          <button onClick={() => handleUpgradeClick("standard")} className="try">選擇Standard方案</button>
         </article>
         {/* Premium方案 */}
         <article className="pricing-card pricing-card--primary">
@@ -70,7 +74,7 @@ export default function PatchRole({ currentUser, setCurrentUser }) {
             <li>撰寫電影評論以記錄您的印象和經歷。</li>
             <li>發布具有您獨特品味的電影院。</li>
           </ul>
-          <button data-role="premium" onClick={handlePlanChanging} className="try">選擇premium方案</button>
+          <button onClick={() => handleUpgradeClick("premium")} className="try">選擇premium方案</button>
         </article>
       </div>
     </div>

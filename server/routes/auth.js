@@ -147,41 +147,50 @@ router.patch("/patchProfile/:_id", passport.authenticate("jwt", { session: false
   };
 })
 
-// 修改身分
+// 修改身分（降級專用）
+// ⚠️ 升級（standard / premium）需透過後台付款驗證流程，不允許用戶自行設定
 router.patch("/patchRole/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
-  // 身分確認後確認文章存在，再儲存新資料
-  // 新身分不能跟舊身分一致
+  const VALID_ROLES = ["free", "standard", "premium"];
+  const SELF_DOWNGRADE_ALLOWED = ["free"]; // 用戶只能自行降回 free，升級需管理員操作
+
   let { _id } = req.params;
   let { role } = req.body;
+
+  // 1. 驗證傳入的 role 必須是合法值
+  if (!VALID_ROLES.includes(role)) {
+    return res.status(400).send("無效的身分類型。");
+  }
+
   try {
     let profileFound = await User.findOne({ _id }).exec();
     if (!profileFound) {
-      return res.status(400).send("找不到個資。無法刪除課程。");
+      return res.status(400).send("找不到個資。");
     }
     if (profileFound.role === role) {
       return res.status(400).send("與原本身分一致，無法更改");
     }
 
-    if (req.user._id.equals(_id)) {
-      const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
-      // 只允許更新 role 欄位，防止大量賦值攻擊覆蓋其他敏感欄位
-      let updatedProfile = await User.findOneAndUpdate(
-        { _id },
-        { role: req.body.role },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-      return res.send({
-        message: "你的身分更新成功~",
-        token: "JWT " + token,
-        user: updatedProfile,
-      });
-    } else {
+    if (!req.user._id.equals(_id)) {
       return res.status(403).send("只有用戶本人才能修改資料。");
     }
+
+    // 2. 用戶本人只能降級回 free，不能自行升級為 standard / premium
+    if (!SELF_DOWNGRADE_ALLOWED.includes(role)) {
+      return res.status(403).send("升級方案需透過付款流程，無法自行變更。");
+    }
+
+    const tokenObject = { _id: profileFound._id, email: profileFound.email };
+    const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
+    let updatedProfile = await User.findOneAndUpdate(
+      { _id },
+      { role },
+      { new: true, runValidators: true }
+    );
+    return res.send({
+      message: "你的身分更新成功~",
+      token: "JWT " + token,
+      user: updatedProfile,
+    });
   } catch (e) {
     return res.status(500).send("無法修改資料");
   };
@@ -475,6 +484,66 @@ router.patch("/patchTheater/upcoming/:_id", passport.authenticate("jwt", { sessi
   } catch (e) {
     return res.status(500).send("無法修改資料");
   };
+});
+
+// 假金流升級身分（模擬付款驗證）
+router.post("/mockPayment/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  const UPGRADABLE_ROLES = ["standard", "premium"];
+  const { _id } = req.params;
+  const { targetRole, cardNumber, cardHolder, expiry, cvv } = req.body;
+
+  // 1. 驗證目標身分必須是可升級的方案
+  if (!UPGRADABLE_ROLES.includes(targetRole)) {
+    return res.status(400).send("無效的升級方案。");
+  }
+
+  // 2. 只有本人才能為自己付款
+  if (!req.user._id.equals(_id)) {
+    return res.status(403).send("無法為他人付款。");
+  }
+
+  // 3. 模擬基本卡號格式驗證（去掉空格後必須是 16 位數字）
+  const rawCard = (cardNumber || "").replace(/\s/g, "");
+  if (!/^\d{16}$/.test(rawCard)) {
+    return res.status(400).send("卡號格式錯誤，請輸入 16 位數字。");
+  }
+  if (!cardHolder || cardHolder.trim().length < 2) {
+    return res.status(400).send("請填寫持卡人姓名。");
+  }
+  if (!/^\d{2}\/\d{2}$/.test(expiry || "")) {
+    return res.status(400).send("到期日格式錯誤，請輸入 MM/YY。");
+  }
+  if (!/^\d{3}$/.test(cvv || "")) {
+    return res.status(400).send("CVV 格式錯誤，請輸入 3 位數字。");
+  }
+
+  try {
+    let profileFound = await User.findOne({ _id }).exec();
+    if (!profileFound) {
+      return res.status(400).send("找不到用戶。");
+    }
+    if (profileFound.role === targetRole) {
+      return res.status(400).send("您已經是此方案，無需重複購買。");
+    }
+
+    // 模擬付款成功，升級角色
+    const updatedProfile = await User.findOneAndUpdate(
+      { _id },
+      { role: targetRole },
+      { new: true, runValidators: true }
+    );
+
+    const tokenObject = { _id: updatedProfile._id, email: updatedProfile.email };
+    const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
+
+    return res.send({
+      message: `付款成功！已升級為 ${targetRole} 方案。`,
+      token: "JWT " + token,
+      user: updatedProfile,
+    });
+  } catch (e) {
+    return res.status(500).send("付款處理失敗，請稍後再試。");
+  }
 });
 
 module.exports = router;

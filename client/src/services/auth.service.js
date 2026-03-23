@@ -232,6 +232,16 @@ class AuthService {
     );
   }
 
+  // 假金流付款升級身分
+  mockPayment(_id, targetRole, cardNumber, cardHolder, expiry, cvv) {
+    let token = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).token : "";
+    return axios.post(
+      API_URL + "/mockPayment/" + _id,
+      { targetRole, cardNumber, cardHolder, expiry, cvv },
+      { headers: { Authorization: token } }
+    );
+  }
+
   //拿到登入後的會員
   getCurrentUser() {
     return JSON.parse(localStorage.getItem("user"));

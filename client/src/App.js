@@ -8,6 +8,7 @@ import Layout from "./components/Layout";
 import Homepage from "./pages/Homepage/Homepage";
 import PatchProfile from "./pages/Homepage/PatchProfile/PatchProfile";
 import PatchRole from "./pages/Homepage/patchRole/PatchRole";
+import MockPayment from "./pages/Homepage/MockPayment/MockPayment";
 import AllUser from "./pages/AllUser/AllUser";
 import ThisUser from "./pages/AllUser/ThisUser/ThisUser";
 import UserReviews from "./pages/AllUser/ThisUser/UserReviews/UserReviews";
@@ -52,6 +53,7 @@ export default function App() {
           <Route index element={<Homepage currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="profile/patchProfile" element={<PatchProfile currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="profile/patchRole" element={<PatchRole currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
+          <Route path="profile/mockPayment" element={<MockPayment currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
           <Route path="allUser" element={<AllUser currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
             <Route path=":userId" element={<ThisUser currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
               <Route path="userReviews" element={<UserReviews currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
