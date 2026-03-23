@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
       if (isMatch) {
         // 製作 JSON Web Token
         const tokenObject = { _id: foundUser._id, email: foundUser.email };
-        const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+        const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
         return res.send({
           token: "JWT " + token,
           user: {
@@ -114,7 +114,7 @@ router.patch("/patchProfile/:_id", passport.authenticate("jwt", { session: false
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
       let updatedProfile = await User.findOneAndUpdate({ _id }, req.body, {
         new: true,
         runValidators: true,
@@ -149,7 +149,7 @@ router.patch("/patchRole/:_id", passport.authenticate("jwt", { session: false })
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
       let updatedProfile = await User.findOneAndUpdate({ _id }, req.body, {
         new: true,
         runValidators: true,
@@ -198,7 +198,7 @@ router.patch("/patchSlide/:_id", passport.authenticate("jwt", { session: false }
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
       let patchSlide = await User.findOneAndUpdate({ _id }, req.body, {
         new: true,
       });
@@ -226,7 +226,7 @@ router.patch("/patchReviews/:_id", passport.authenticate("jwt", { session: false
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
       let patchReviews = await User.findOneAndUpdate({ _id }, req.body, {
         new: true,
         runValidators: true,
@@ -255,7 +255,7 @@ router.patch("/patchCast/:_id", passport.authenticate("jwt", { session: false })
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
       let patchCast = await User.findOneAndUpdate(
         { _id },
         req.body,
@@ -285,7 +285,7 @@ router.patch("/patchFavoritePerson/:_id", passport.authenticate("jwt", { session
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
       let patchFavoritePerson = await User.findOneAndUpdate(
         { _id },
         req.body,
@@ -315,7 +315,7 @@ router.patch("/patchTheme/:_id", passport.authenticate("jwt", { session: false }
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
       let patchTheme = await User.findOneAndUpdate(
         { _id },
         req.body,
@@ -346,7 +346,7 @@ router.patch("/patchTheater/releases/:_id", passport.authenticate("jwt", { sessi
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
 
       let updateFields = {};
       if (req.body.releases !== undefined) { // 檢查 releases 是否為 undefined
@@ -385,7 +385,7 @@ router.patch("/patchTheater/leaving/:_id", passport.authenticate("jwt", { sessio
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
 
       let updateFields = {};
       if (req.body.leaving !== undefined) {
@@ -424,7 +424,7 @@ router.patch("/patchTheater/upcoming/:_id", passport.authenticate("jwt", { sessi
 
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
-      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+      const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
 
       let updateFields = {};
       if (req.body.upcoming !== undefined) {
