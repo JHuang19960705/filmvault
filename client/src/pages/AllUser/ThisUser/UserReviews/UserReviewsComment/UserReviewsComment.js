@@ -207,7 +207,7 @@ export default function UserReviewsComment({ currentUser }) {
                   <div className="movie-user-right-other-detail">
                     <div className="movie-user-right-other-detail-user">
                       <div className="movie-user-right-other-detail-user-name">
-                        <p>@{commenter._id}</p>
+                        <p>@{commenter.commenterId?.username || commenter.commenterId}</p>
                       </div>
                       <div className="movie-user-right-other-detail-date">
                         <p>{commenter.date.slice(0, 10)}</p>
