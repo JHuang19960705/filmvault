@@ -149,6 +149,7 @@ router.get("/findByContentId/:_id", async (req, res) => {
   try {
     let contentFound = await Content.find({ _id: _id })
       .populate("writer", ["email", "username", "role"])
+      .populate("commenters.commenterId", ["username"])
       .exec();
     return res.send(contentFound);
   } catch (e) {

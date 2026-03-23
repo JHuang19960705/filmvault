@@ -237,16 +237,16 @@ export default function YourReviewsComment({ currentUser }) {
                 </div>
                 <div className="movie-user-right-other-detail">
                   <div className="movie-user-right-other-detail-user">
-                    {/* 用戶Id */}
+                    {/* 用戶名稱 */}
                     <div className="movie-user-right-other-detail-user-name">
-                      <p>@{commenter.commenterId}</p>
+                      <p>@{commenter.commenterId?.username || commenter.commenterId}</p>
                     </div>
                     {/* 時間 */}
                     <div className="movie-user-right-other-detail-date">
                       <p>{commenter.date.slice(0, 10)}</p>
                     </div>
                     {/* 刪除鍵：只有評論本人或文章作者才能看到 */}
-                    {(commenter.commenterId === currentUser.user._id || reviewData.writer._id === currentUser.user._id) && (
+                    {(commenter.commenterId?._id === currentUser.user._id || reviewData.writer._id === currentUser.user._id) && (
                       <div className="movie-user-right-other-edit" onClick={() => handleToggleDeleteButton(commenter._id)}>
                         <svg width="10px" height="100%" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
                           <circle cx="5" cy="1" r="1.5" fill="#00000083" />
