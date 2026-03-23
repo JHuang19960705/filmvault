@@ -61,10 +61,10 @@ router.post("/login", loginLimiter, async (req, res) => {
   }
 });
 
-// 獲得系統中的所有會員
-router.get("/", async (req, res) => {
+// 獲得系統中的所有會員（需要登入）
+router.get("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
   try {
-    let userFound = await User.find({}, { username: 1, email: 1, role: 1, _id: 1, date: 1 })
+    let userFound = await User.find({}, { username: 1, role: 1, _id: 1, date: 1 })
       .exec();
     return res.send(userFound);
   } catch (e) {
@@ -72,11 +72,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-// 透過Id拿到該會員基本資料
-router.get("/getUserById/:userId", async (req, res) => {
+// 透過Id拿到該會員基本資料（需要登入）
+router.get("/getUserById/:userId", passport.authenticate("jwt", { session: false }), async (req, res) => {
   let { userId } = req.params;
   try {
-    let userFound = await User.findOne({ _id: userId }, { username: 1, email: 1, role: 1, _id: 1, date: 1 })
+    let userFound = await User.findOne({ _id: userId }, { username: 1, role: 1, _id: 1, date: 1 })
       .exec();
     return res.send(userFound);
   } catch (e) {
@@ -84,8 +84,8 @@ router.get("/getUserById/:userId", async (req, res) => {
   }
 });
 
-// 透過Id拿到該會員recommend資料
-router.get("/getUserRecommendById/:userId", async (req, res) => {
+// 透過Id拿到該會員recommend資料（需要登入）
+router.get("/getUserRecommendById/:userId", passport.authenticate("jwt", { session: false }), async (req, res) => {
   let { userId } = req.params;
   try {
     let userFound = await User.findOne({ _id: userId }, { slide: 1, cast: 1, favoritePerson: 1, theme: 1, _id: 1, contentId: 1, theater: 1 })

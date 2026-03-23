@@ -25,17 +25,20 @@ class AuthService {
 
   // 拿到所有會員
   getAllUser() {
-    return axios.get(API_URL + "/");
+    let token = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).token : "";
+    return axios.get(API_URL + "/", { headers: { Authorization: token } });
   }
 
   // 透過Id拿到該會員
   getUserById(_id) {
-    return axios.get(API_URL + "/getUserById/" + _id);
+    let token = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).token : "";
+    return axios.get(API_URL + "/getUserById/" + _id, { headers: { Authorization: token } });
   }
 
   // 透過Id拿到該會員recommend資料
   getUserRecommendById(_id) {
-    return axios.get(API_URL + "/getUserRecommendById/" + _id);
+    let token = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).token : "";
+    return axios.get(API_URL + "/getUserRecommendById/" + _id, { headers: { Authorization: token } });
   }
 
   // 改個資
