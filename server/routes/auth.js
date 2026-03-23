@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models").user;
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 router.use((req, res, next) => {
   console.log("allowing access to a request about auth...");
@@ -102,7 +103,7 @@ router.post("/register", async (req, res) => {
 })
 
 // 修改名字、信箱
-router.patch("/patchProfile/:_id", async (req, res) => {
+router.patch("/patchProfile/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   // 身分確認後確認文章存在，再儲存新資料
   let { _id } = req.params;
   try {
@@ -111,7 +112,7 @@ router.patch("/patchProfile/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法刪除課程。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
       let updatedProfile = await User.findOneAndUpdate({ _id }, req.body, {
@@ -132,7 +133,7 @@ router.patch("/patchProfile/:_id", async (req, res) => {
 })
 
 // 修改身分
-router.patch("/patchRole/:_id", async (req, res) => {
+router.patch("/patchRole/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   // 身分確認後確認文章存在，再儲存新資料
   // 新身分不能跟舊身分一致
   let { _id } = req.params;
@@ -142,12 +143,11 @@ router.patch("/patchRole/:_id", async (req, res) => {
     if (!profileFound) {
       return res.status(400).send("找不到個資。無法刪除課程。");
     }
-    let roleFound = await User.findOne({ role }).exec();
-    if (profileFound.equals(roleFound)) {
+    if (profileFound.role === role) {
       return res.status(400).send("與原本身分一致，無法更改");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
       let updatedProfile = await User.findOneAndUpdate({ _id }, req.body, {
@@ -168,7 +168,7 @@ router.patch("/patchRole/:_id", async (req, res) => {
 })
 
 // 刪除
-router.delete("/:_id", async (req, res) => {
+router.delete("/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   let { _id } = req.params;
   // 確認用戶存在
   try {
@@ -185,7 +185,7 @@ router.delete("/:_id", async (req, res) => {
 })
 
 //放入幻燈片
-router.patch("/patchSlide/:_id", async (req, res) => {
+router.patch("/patchSlide/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   let { _id } = req.params;
   try {
     let profileFound = await User.findOne({ _id }).exec();
@@ -193,7 +193,7 @@ router.patch("/patchSlide/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法放入幻燈片。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
       let patchSlide = await User.findOneAndUpdate({ _id }, req.body, {
@@ -213,7 +213,7 @@ router.patch("/patchSlide/:_id", async (req, res) => {
 })
 
 //放入文章Id
-router.patch("/patchReviews/:_id", async (req, res) => {
+router.patch("/patchReviews/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   let { _id } = req.params;
   try {
     let profileFound = await User.findOne({ _id }).exec();
@@ -221,7 +221,7 @@ router.patch("/patchReviews/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法放入幻燈片。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
       let patchReviews = await User.findOneAndUpdate({ _id }, req.body, {
@@ -242,7 +242,7 @@ router.patch("/patchReviews/:_id", async (req, res) => {
 })
 
 //修改人物
-router.patch("/patchCast/:_id", async (req, res) => {
+router.patch("/patchCast/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   let { _id } = req.params;
   try {
     let profileFound = await User.findOne({ _id }).exec();
@@ -250,7 +250,7 @@ router.patch("/patchCast/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法放入幻燈片。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
       let patchCast = await User.findOneAndUpdate(
@@ -272,7 +272,7 @@ router.patch("/patchCast/:_id", async (req, res) => {
 })
 
 //修改人物主題
-router.patch("/patchFavoritePerson/:_id", async (req, res) => {
+router.patch("/patchFavoritePerson/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   let { _id } = req.params;
   try {
     let profileFound = await User.findOne({ _id }).exec();
@@ -280,7 +280,7 @@ router.patch("/patchFavoritePerson/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法放入幻燈片。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
       let patchFavoritePerson = await User.findOneAndUpdate(
@@ -302,7 +302,7 @@ router.patch("/patchFavoritePerson/:_id", async (req, res) => {
 })
 
 //修改主題
-router.patch("/patchTheme/:_id", async (req, res) => {
+router.patch("/patchTheme/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   let { _id } = req.params;
   try {
     let profileFound = await User.findOne({ _id }).exec();
@@ -310,7 +310,7 @@ router.patch("/patchTheme/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法放入幻燈片。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
       let patchTheme = await User.findOneAndUpdate(
@@ -333,7 +333,7 @@ router.patch("/patchTheme/:_id", async (req, res) => {
 
 //放入電影院
 // 更新 releases 屬性
-router.patch("/patchTheater/releases/:_id", async (req, res) => {
+router.patch("/patchTheater/releases/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const { _id } = req.params;
   try {
     const profileFound = await User.findOne({ _id }).exec();
@@ -341,7 +341,7 @@ router.patch("/patchTheater/releases/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法放入幻燈片。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
 
@@ -372,7 +372,7 @@ router.patch("/patchTheater/releases/:_id", async (req, res) => {
 });
 
 // 更新 leaving 屬性
-router.patch("/patchTheater/leaving/:_id", async (req, res) => {
+router.patch("/patchTheater/leaving/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const { _id } = req.params;
   try {
     const profileFound = await User.findOne({ _id }).exec();
@@ -380,7 +380,7 @@ router.patch("/patchTheater/leaving/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法放入幻燈片。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
 
@@ -411,7 +411,7 @@ router.patch("/patchTheater/leaving/:_id", async (req, res) => {
 });
 
 // 更新 upcoming 屬性
-router.patch("/patchTheater/upcoming/:_id", async (req, res) => {
+router.patch("/patchTheater/upcoming/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const { _id } = req.params;
   try {
     const profileFound = await User.findOne({ _id }).exec();
@@ -419,7 +419,7 @@ router.patch("/patchTheater/upcoming/:_id", async (req, res) => {
       return res.status(400).send("找不到個資。無法放入幻燈片。");
     }
 
-    if (profileFound.equals(_id)) {
+    if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
 
