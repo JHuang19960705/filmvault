@@ -14,7 +14,8 @@ const commentSchema = new Schema({
   },
   content: {
     type: String,
-    required: true
+    required: true,
+    maxlength: [500, "留言不能超過 500 個字"],
   },
   date: {
     type: Date,
@@ -31,10 +32,12 @@ const contentSchema = new Schema({
   title: {
     type: String,
     required: true,
+    maxlength: [100, "標題不能超過 100 個字"],
   },
   content: {
     type: String,
     required: true,
+    maxlength: [5000, "影評內容不能超過 5000 個字"],
   },
   date: {
     type: Date,

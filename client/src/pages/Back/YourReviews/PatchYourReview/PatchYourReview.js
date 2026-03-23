@@ -84,11 +84,11 @@ export default function PatchYourReview({ currentUser }) {
       <div>
         <div className="mb-5 h-full">
           <label htmlFor="title"><div className="mb-2 ml-2 text-sm">標題</div></label>
-          <input value={title} onChange={handleChangeTitle} className="h-9 w-full cursor-text rounded-2xl bg-gray-50 p-3 text-xs outline-none hover:border hover:border-blue-500 dark:text-black" name="title" type="text" placeholder="Type Title..." />
+          <input value={title} onChange={handleChangeTitle} maxLength={100} className="h-9 w-full cursor-text rounded-2xl bg-gray-50 p-3 text-xs outline-none hover:border hover:border-blue-500 dark:text-black" name="title" type="text" placeholder="Type Title..." />
         </div>
         <div className="mb-5 h-full">
           <label htmlFor="reviews"><div className="mb-2 ml-2 text-sm">內容</div></label>
-          <textarea value={review} onChange={handleChangeReview} rows="1" className="h-auto min-h-24 w-full cursor-text rounded-2xl bg-gray-50 p-3 text-xs outline-none hover:border hover:border-blue-500 dark:text-black" id="reviews" name="reviews" placeholder="Type Here..."></textarea>
+          <textarea value={review} onChange={handleChangeReview} maxLength={5000} rows="1" className="h-auto min-h-24 w-full cursor-text rounded-2xl bg-gray-50 p-3 text-xs outline-none hover:border hover:border-blue-500 dark:text-black" id="reviews" name="reviews" placeholder="Type Here..."></textarea>
         </div>
         <div className="mb-5 h-full">
           <label htmlFor="tag"><div className="mb-2 ml-2 text-xs">TAG</div></label>

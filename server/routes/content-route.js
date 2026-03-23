@@ -19,6 +19,12 @@ router.post("/", async (req, res) => {
   }
   // 身分確認後儲存
   let { title, content, tags, TMDBId, TMDBImg } = req.body;
+
+  if (!title || !title.trim()) return res.status(400).send("標題不能為空。");
+  if (title.trim().length > 100) return res.status(400).send("標題不能超過 100 個字。");
+  if (!content || !content.trim()) return res.status(400).send("影評內容不能為空。");
+  if (content.trim().length > 5000) return res.status(400).send("影評內容不能超過 5000 個字。");
+
   try {
     let newContent = new Content({
       title,
@@ -45,6 +51,11 @@ router.patch("/:_id", async (req, res) => {
   }
   // 身分確認後確認文章存在，再儲存新資料
   let { _id } = req.params;
+  const { title, content } = req.body;
+
+  if (title !== undefined && title.trim().length > 100) return res.status(400).send("標題不能超過 100 個字。");
+  if (content !== undefined && content.trim().length > 5000) return res.status(400).send("影評內容不能超過 5000 個字。");
+
   try {
     let contentFound = await Content.findOne({ _id }).exec();
     if (!contentFound) {
@@ -207,9 +218,12 @@ router.post("/addComment/:contentId", async (req, res) => {
   let { content } = req.body;
   let commenterId = req.user._id; // 從 JWT 取得真實身份，不信任前端傳來的值
 
-  // 確認評論內容不為空
+  // 確認評論內容不為空，且不超過長度上限
   if (!content || !content.trim()) {
     return res.status(400).send("評論內容不能為空。");
+  }
+  if (content.trim().length > 500) {
+    return res.status(400).send("留言不能超過 500 個字。");
   }
 
   try {

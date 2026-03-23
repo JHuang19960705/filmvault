@@ -73,12 +73,12 @@ export default function PostMovieContent () {
           <div className="mb-5 h-full">
             {/* 輸入標題 */}
             <label for="title"><div className="mb-2 ml-2 text-sm">標題</div></label>
-            <input onChange={handleChangeTitle} className="h-9 w-full cursor-text rounded-2xl bg-gray-50 p-3 text-xs outline-none hover:border hover:border-blue-500 dark:text-black" name="title" type="text" placeholder="Type Title..." />
+            <input onChange={handleChangeTitle} maxLength={100} className="h-9 w-full cursor-text rounded-2xl bg-gray-50 p-3 text-xs outline-none hover:border hover:border-blue-500 dark:text-black" name="title" type="text" placeholder="Type Title..." />
           </div>
           <div className="mb-5 h-full">
             {/* 輸入內容 */}
             <label for="reviews"><div className="mb-2 ml-2 text-sm">內容</div></label>
-            <textarea onChange={handleChangeContent} rows="1" className="h-auto min-h-24 w-full cursor-text rounded-2xl bg-gray-50 p-3 text-xs outline-none hover:border hover:border-blue-500 dark:text-black" id="reviews" name="reviews" placeholder="Type Here..."></textarea>
+            <textarea onChange={handleChangeContent} maxLength={5000} rows="1" className="h-auto min-h-24 w-full cursor-text rounded-2xl bg-gray-50 p-3 text-xs outline-none hover:border hover:border-blue-500 dark:text-black" id="reviews" name="reviews" placeholder="Type Here..."></textarea>
           </div>
           <div className="mb-5 h-full">
             {/* 輸入標籤 */}

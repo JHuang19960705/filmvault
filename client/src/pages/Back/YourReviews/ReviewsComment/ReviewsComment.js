@@ -215,6 +215,7 @@ export default function YourReviewsComment({ currentUser }) {
                 placeholder="發表留言..."
                 value={newComment}
                 onChange={handleChange}
+                maxLength={500}
               />
               {/* <!-- 取消、留言 --> */}
               <div className="movie-user-new-comment-content-button">
