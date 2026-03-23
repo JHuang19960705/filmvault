@@ -200,7 +200,8 @@ router.patch("/clickLike/:contentId", async (req, res) => {
 // 新增評論
 router.post("/addComment/:contentId", async (req, res) => {
   let { contentId } = req.params;
-  let { commenterId, content } = req.body;
+  let { content } = req.body;
+  let commenterId = req.user._id; // 從 JWT 取得真實身份，不信任前端傳來的值
   try {
 
     // 確認用戶存在

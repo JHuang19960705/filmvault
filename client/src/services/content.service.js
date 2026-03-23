@@ -140,11 +140,11 @@ class ContentService {
   }
 
   // 添加評論
-  postComment(contentId, commenterId, commentContent) {
+  postComment(contentId, commentContent) {
     let token = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).token : "";
     return axios.post(
       API_URL + "/addComment/" + contentId,
-      { commenterId: commenterId, content: commentContent },
+      { content: commentContent },
       {
         headers: {
           Authorization: token,
