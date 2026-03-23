@@ -195,6 +195,12 @@ router.post("/addComment/:contentId", async (req, res) => {
   let { contentId } = req.params;
   let { content } = req.body;
   let commenterId = req.user._id; // 從 JWT 取得真實身份，不信任前端傳來的值
+
+  // 確認評論內容不為空
+  if (!content || !content.trim()) {
+    return res.status(400).send("評論內容不能為空。");
+  }
+
   try {
 
     // 確認用戶存在
