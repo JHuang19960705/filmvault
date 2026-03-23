@@ -232,7 +232,7 @@ router.post("/addComment/:contentId", async (req, res) => {
 // 刪除評論
 router.delete("/deleteComment/:contentId/:commentId", async (req, res) => {
   const { contentId, commentId } = req.params;
-  const { deleterId } = req.body;
+  const requesterId = req.user._id; // 從 JWT 取得真實身份，不信任前端傳來的 body
   try {
     // 確認影評存在，並拿到內容，如果錯就跳error
     let contentFound = await Content.findOne({ _id: contentId }).exec();
@@ -243,9 +243,12 @@ router.delete("/deleteComment/:contentId/:commentId", async (req, res) => {
       return res.status(404).send("找不到評論，無法刪除。");
     }
 
-    // 確認刪除者與內容作者是同一人
-    if (deleterId !== contentFound.writer.toString()) {
-      return res.status(403).send("只有內容作者才能刪除評論。");
+    // 評論作者本人，或文章作者（版主），才能刪除評論
+    const isCommentAuthor = commentToDelete.commenterId.equals(requesterId);
+    const isContentAuthor = contentFound.writer.equals(requesterId);
+
+    if (!isCommentAuthor && !isContentAuthor) {
+      return res.status(403).send("只有評論作者或文章作者才能刪除評論。");
     }
 
     // 找到評論後直接删除

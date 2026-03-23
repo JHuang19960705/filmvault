@@ -92,7 +92,7 @@ export default function YourReviewsComment({ currentUser }) {
     setLoading(true);
 
     try {
-      await ContentService.deleteComment(reviewId, commentId, currentUser.user._id);
+      await ContentService.deleteComment(reviewId, commentId);
       window.alert("評論刪除成功");
       fetchData();
     } catch (error) {
@@ -245,15 +245,17 @@ export default function YourReviewsComment({ currentUser }) {
                     <div className="movie-user-right-other-detail-date">
                       <p>{commenter.date.slice(0, 10)}</p>
                     </div>
-                    {/* 刪除鍵 */}
-                    <div className="movie-user-right-other-edit" onClick={() => handleToggleDeleteButton(commenter._id)}>
-                      <svg width="10px" height="100%" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="5" cy="1" r="1.5" fill="#00000083" />
-                        <circle cx="5" cy="6" r="1.5" fill="#00000083" />
-                        <circle cx="5" cy="11" r="1.5" fill="#00000083" />
-                      </svg>
-                      <div id={`deleteButton-${commenter._id}`} style={{ display: "none" }} onClick={() => handleDeleteComment(commenter._id)} className="movie-user-right-other-edit-delete">刪除</div>
-                    </div>
+                    {/* 刪除鍵：只有評論本人或文章作者才能看到 */}
+                    {(commenter.commenterId === currentUser.user._id || reviewData.writer._id === currentUser.user._id) && (
+                      <div className="movie-user-right-other-edit" onClick={() => handleToggleDeleteButton(commenter._id)}>
+                        <svg width="10px" height="100%" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="5" cy="1" r="1.5" fill="#00000083" />
+                          <circle cx="5" cy="6" r="1.5" fill="#00000083" />
+                          <circle cx="5" cy="11" r="1.5" fill="#00000083" />
+                        </svg>
+                        <div id={`deleteButton-${commenter._id}`} style={{ display: "none" }} onClick={() => handleDeleteComment(commenter._id)} className="movie-user-right-other-edit-delete">刪除</div>
+                      </div>
+                    )}
                   </div>
                   <div className="movie-user-right-other-detail-user-comment">
                     <p>{commenter.content}</p>

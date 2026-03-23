@@ -154,12 +154,11 @@ class ContentService {
   }
 
   // 刪除評論
-  deleteComment(contentId, commentId, deleterId) {
+  deleteComment(contentId, commentId) {
     let token = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).token : "";
     return axios.delete(
       `${API_URL}/deleteComment/${contentId}/${commentId}`,
       {
-        data: { deleterId },
         headers: {
           Authorization: token,
         },
