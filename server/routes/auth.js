@@ -2,6 +2,16 @@ const router = require("express").Router();
 const User = require("../models").user;
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const rateLimit = require("express-rate-limit");
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 分鐘
+  max: 10, // 同一 IP 在 15 分鐘內最多 10 次嘗試
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: "登入嘗試次數過多，請 15 分鐘後再試。",
+  skipSuccessfulRequests: true, // 成功登入不計入次數
+});
 
 router.use((req, res, next) => {
   console.log("allowing access to a request about auth...");
@@ -9,7 +19,7 @@ router.use((req, res, next) => {
 })
 
 // 登入
-router.post("/login", async (req, res) => {
+router.post("/login", loginLimiter, async (req, res) => {
   try {
     const foundUser = await User.findOne({ email: req.body.email });
 
