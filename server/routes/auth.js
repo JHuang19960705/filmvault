@@ -98,8 +98,8 @@ router.get("/getUserRecommendById/:userId", async (req, res) => {
 
 // 註冊
 router.post("/register", async (req, res) => {
-  let { email, username, password, role } = req.body;
-  let newUser = new User({ email, username, password, role });
+  let { email, username, password } = req.body;
+  let newUser = new User({ email, username, password, role: "free" }); // 角色永遠從 free 開始，不接受前端傳入的 role
 
   try {
     let savedUser = await newUser.save();

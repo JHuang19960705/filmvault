@@ -7,7 +7,6 @@ export default function RegisterComponent({ currentUser }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState(clickRole);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -26,14 +25,9 @@ export default function RegisterComponent({ currentUser }) {
     setPassword(e.target.value);
   };
 
-  // 處理角色輸入
-  const handleRole = (e) => {
-    setRole(e.target.value);
-  };
-
   // 處理註冊
   const handleRegister = () => {
-    AuthService.register(username, email, password, role)
+    AuthService.register(username, email, password)
       .then(() => {
         // 註冊成功，導航至登錄頁面
         window.alert("註冊成功。您現在將被導向到登入頁面");
@@ -92,18 +86,7 @@ export default function RegisterComponent({ currentUser }) {
           placeholder="長度至少超過6個英文或數字"
         />
       </div>
-      {/* 角色輸入框 */}
-      <div className="mb-5 h-full">
-        <label htmlFor="password"><div className="mb-2 ml-2 text-sm">身份</div></label>
-        <input
-          onChange={handleRole}
-          type="text"
-          className="h-9 w-full cursor-text rounded-2xl bg-gray-50 pl-4 text-xs outline-none hover:border hover:border-blue-500 dark:text-black"
-          name="role"
-          placeholder="只能填入free, standard, premium其中之一"
-          defaultValue={role} // Use defaultValue to set initial value
-        />
-      </div>
+      {/* 所有新帳號一律從 free 開始，移除角色輸入欄位防止權限偽造 */}
       {/* 按鈕區域 */}
       <div className="mt-6 grid w-full md:grid-cols-2">
         {/* 顯示錯誤消息 */}
