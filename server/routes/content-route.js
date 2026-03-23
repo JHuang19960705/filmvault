@@ -121,7 +121,7 @@ router.get("/", async (req, res) => {
     let contentFound = await Content.find({})
       .populate(
         "writer",
-        ["username", "email"]
+        ["username"]
       )
       .exec();
     return res.send(contentFound);
@@ -134,7 +134,7 @@ router.get("/", async (req, res) => {
 router.get("/writer/:_writer_id", async (req, res) => {
   let { _writer_id } = req.params;
   let contentFound = await Content.find({ writer: _writer_id })
-    .populate("writer", ["username", "email"])
+    .populate("writer", ["username"])
     .exec();
   return res.send(contentFound);
 });
@@ -144,7 +144,7 @@ router.get("/findByContentTitle/:title", async (req, res) => {
   let { title } = req.params;
   try {
     let contentFound = await Content.find({ title: title })
-      .populate("writer", ["email", "username"])
+      .populate("writer", ["username"])
       .exec();
     return res.send(contentFound);
   } catch (e) {
@@ -157,7 +157,7 @@ router.get("/findByTMDBId/:TMDBId", async (req, res) => {
   let { TMDBId } = req.params;
   try {
     let TMDBIdFound = await Content.find({ TMDBId: TMDBId })
-      .populate("writer", ["email", "username", "role"])
+      .populate("writer", ["username", "role"])
       .exec();
     return res.send(TMDBIdFound);
   } catch (e) {
@@ -170,7 +170,7 @@ router.get("/findByContentId/:_id", async (req, res) => {
   let { _id } = req.params;
   try {
     let contentFound = await Content.find({ _id: _id })
-      .populate("writer", ["email", "username", "role"])
+      .populate("writer", ["username", "role"])
       .populate("commenters.commenterId", ["username"])
       .exec();
     return res.send(contentFound);
