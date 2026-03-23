@@ -236,7 +236,17 @@ class AuthService {
 
   //刪除用戶
   deleteUser(_id) {
-    return axios.delete(API_URL + "/" + _id);
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+    return axios.delete(API_URL + "/" + _id, {
+      headers: {
+        Authorization: token,
+      },
+    });
   }
 }
 

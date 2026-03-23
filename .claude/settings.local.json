@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"c:\\\\Users\\\\Josh Huang\\\\桌面\\\\寫作計畫\\\\網站設計\\\\網站HTML\\\\\\(React\\)影視網站串接TMDB\\\\practice-TMDB\" -type f -name \"*.js\" -o -name \"*.jsx\" -o -name \"*.json\" -o -name \"*.ts\" -o -name \"*.tsx\" -o -name \".env*\" -o -name \"*.md\")",
+      "Bash(ls -la \"/c/Users/Josh Huang/桌面/寫作計畫/網站設計/網站HTML/\\(React\\)影視網站串接TMDB/practice-TMDB/\")",
+      "Bash(find \"/c/Users/Josh Huang/桌面/寫作計畫/網站設計/網站HTML/\\(React\\)影視網站串接TMDB/practice-TMDB\" -type f \\\\\\( -name \"*.js\" -o -name \"*.jsx\" -o -name \"*.ts\" -o -name \"*.tsx\" \\\\\\) ! -path \"*/node_modules/*\" ! -path \"*/.git/*\" ! -path \"*/build/*\" -o -name \"package.json\" ! -path \"*/node_modules/*\" ! -path \"*/.git/*\")",
+      "Bash(find \"/c/Users/Josh Huang/桌面/寫作計畫/網站設計/網站HTML/\\(React\\)影視網站串接TMDB/practice-TMDB\" -name \".env*\" ! -path \"*/node_modules/*\" ! -path \"*/.git/*\")"
+    ]
+  }
+}

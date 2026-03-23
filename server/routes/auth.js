@@ -175,10 +175,13 @@ router.delete("/:_id", passport.authenticate("jwt", { session: false }), async (
     let userFound = await User.findOne({ _id }).exec();
     if (!userFound) {
       return res.status(400).send("找不到User。無法刪除。");
-    } else {
-      await User.deleteOne({ _id }).exec();
-      return res.send("刪除成功~");
     }
+    // 只有本人才能刪除自己的帳號
+    if (!req.user._id.equals(_id)) {
+      return res.status(403).send("只有用戶本人才能刪除自己的帳號。");
+    }
+    await User.deleteOne({ _id }).exec();
+    return res.send("刪除成功~");
   } catch (e) {
     return res.status(500).send(e);
   }
