@@ -125,10 +125,15 @@ router.patch("/patchProfile/:_id", passport.authenticate("jwt", { session: false
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
-      let updatedProfile = await User.findOneAndUpdate({ _id }, req.body, {
-        new: true,
-        runValidators: true,
-      });
+      // 只允許更新 username 和 email，防止大量賦值攻擊（mass assignment）覆蓋 role 等敏感欄位
+      let updatedProfile = await User.findOneAndUpdate(
+        { _id },
+        { username: req.body.username, email: req.body.email },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
       return res.send({
         message: "你的資料更新成功~",
         token: "JWT " + token,
@@ -160,10 +165,15 @@ router.patch("/patchRole/:_id", passport.authenticate("jwt", { session: false })
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
-      let updatedProfile = await User.findOneAndUpdate({ _id }, req.body, {
-        new: true,
-        runValidators: true,
-      });
+      // 只允許更新 role 欄位，防止大量賦值攻擊覆蓋其他敏感欄位
+      let updatedProfile = await User.findOneAndUpdate(
+        { _id },
+        { role: req.body.role },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
       return res.send({
         message: "你的身分更新成功~",
         token: "JWT " + token,
@@ -209,7 +219,8 @@ router.patch("/patchSlide/:_id", passport.authenticate("jwt", { session: false }
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
-      let patchSlide = await User.findOneAndUpdate({ _id }, req.body, {
+      // 只允許更新 slide 欄位，防止大量賦值攻擊
+      let patchSlide = await User.findOneAndUpdate({ _id }, { slide: req.body.slide }, {
         new: true,
       });
       return res.send({
@@ -237,7 +248,8 @@ router.patch("/patchReviews/:_id", passport.authenticate("jwt", { session: false
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
-      let patchReviews = await User.findOneAndUpdate({ _id }, req.body, {
+      // 只允許更新 contentId 欄位，防止大量賦值攻擊
+      let patchReviews = await User.findOneAndUpdate({ _id }, { contentId: req.body.contentId }, {
         new: true,
         runValidators: true,
       });
@@ -266,9 +278,10 @@ router.patch("/patchCast/:_id", passport.authenticate("jwt", { session: false })
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
+      // 只允許更新 cast 欄位，防止大量賦值攻擊
       let patchCast = await User.findOneAndUpdate(
         { _id },
-        req.body,
+        { cast: req.body.cast },
         { new: true, runValidators: true },
       );
       return res.send({
@@ -296,9 +309,10 @@ router.patch("/patchFavoritePerson/:_id", passport.authenticate("jwt", { session
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
+      // 只允許更新 favoritePerson 欄位，防止大量賦值攻擊
       let patchFavoritePerson = await User.findOneAndUpdate(
         { _id },
-        req.body,
+        { favoritePerson: req.body.favoritePerson },
         { new: true, runValidators: true },
       );
       return res.send({
@@ -326,9 +340,10 @@ router.patch("/patchTheme/:_id", passport.authenticate("jwt", { session: false }
     if (req.user._id.equals(_id)) {
       const tokenObject = { _id: profileFound._id, email: profileFound.email };
       const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET, { expiresIn: "7d" });
+      // 只允許更新 theme 欄位，防止大量賦值攻擊
       let patchTheme = await User.findOneAndUpdate(
         { _id },
-        req.body,
+        { theme: req.body.theme },
         { new: true, runValidators: true },
       );
       return res.send({

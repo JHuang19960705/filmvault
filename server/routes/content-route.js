@@ -52,10 +52,21 @@ router.patch("/:_id", async (req, res) => {
     }
 
     if (contentFound.writer.equals(req.user._id)) {
-      let updatedContent = await Content.findOneAndUpdate({ _id }, req.body, {
-        new: true,
-        runValidators: true,
-      });
+      // 只允許更新文章內容欄位，防止大量賦值攻擊覆蓋 writer、like 等欄位
+      let updatedContent = await Content.findOneAndUpdate(
+        { _id },
+        {
+          title: req.body.title,
+          content: req.body.content,
+          tags: req.body.tags,
+          TMDBId: req.body.TMDBId,
+          TMDBImg: req.body.TMDBImg,
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
       return res.send({
         message: "課程更新成功~",
         updatedContent
