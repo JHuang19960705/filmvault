@@ -102,11 +102,8 @@ router.post("/register", async (req, res) => {
   let newUser = new User({ email, username, password, role: "free" }); // 角色永遠從 free 開始，不接受前端傳入的 role
 
   try {
-    let savedUser = await newUser.save();
-    return res.send({
-      msg: "歡迎加入",
-      savedUser,
-    })
+    await newUser.save();
+    return res.send({ msg: "歡迎加入" });
   } catch (e) {
     res.status(500).send("無法儲存使用者...");
   }
