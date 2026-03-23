@@ -20,6 +20,7 @@ const userSchema = new Schema({
     type: String,
     minlength: 8,
     maxlength: 50,
+    select: false, // 預設不回傳密碼雜湊，防止 API response 洩漏
   },
   role: {
     required: true,

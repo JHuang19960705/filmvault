@@ -21,7 +21,7 @@ router.use((req, res, next) => {
 // 登入
 router.post("/login", loginLimiter, async (req, res) => {
   try {
-    const foundUser = await User.findOne({ email: req.body.email });
+    const foundUser = await User.findOne({ email: req.body.email }).select("+password");
 
     if (!foundUser) {
       return res.status(401).send("此信箱未註冊。");
