@@ -109,7 +109,7 @@ class ContentService {
   }
 
   // 按讚
-  patchLike(contentId, commenterId) {
+  patchLike(contentId) {
     let token;
     if (localStorage.getItem("user")) {
       token = JSON.parse(localStorage.getItem("user")).token;
@@ -118,7 +118,7 @@ class ContentService {
     }
     return axios.patch(
       API_URL + "/clickLike/" + contentId,
-      { commenterId },
+      {},
       {
         headers: {
           Authorization: token,
