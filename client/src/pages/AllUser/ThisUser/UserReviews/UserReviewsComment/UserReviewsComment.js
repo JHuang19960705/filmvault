@@ -61,6 +61,7 @@ export default function UserReviewsComment({ currentUser }) {
 
   // 提交影評
   const handleClickComment = async () => {
+    if (!newComment.trim()) return;
     const confirmed = window.confirm("確定送出這則評論嗎?");
     if (!confirmed) return;
     
@@ -190,7 +191,7 @@ export default function UserReviewsComment({ currentUser }) {
                     <button onClick={handleCancel} className={`movie-user-new-comment-content-button-cm-cancel ${newComment ? "button-active" : ""}`} >
                       取消
                     </button>
-                    <button onClick={handleClickComment} className={`movie-user-new-comment-content-button-cm-message ${newComment ? "button-active" : ""}`}>
+                    <button onClick={handleClickComment} disabled={!newComment.trim()} className={`movie-user-new-comment-content-button-cm-message ${newComment.trim() ? "button-active" : ""}`}>
                       留言
                     </button>
                   </div>
