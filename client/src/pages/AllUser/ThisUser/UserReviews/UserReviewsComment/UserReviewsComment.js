@@ -67,7 +67,7 @@ export default function UserReviewsComment({ currentUser }) {
     setLoading(true);
 
     try {
-      await ContentService.postComment(reviewId, currentUser.user._id, newComment);
+      await ContentService.postComment(reviewId, newComment);
       window.alert("評論成功");
       fetchData();
       setNewComment(""); // 清空輸入框
