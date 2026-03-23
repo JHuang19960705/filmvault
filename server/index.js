@@ -26,7 +26,7 @@ mongoose
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:3000" }));
 
 app.use("/api/user", authRoute);
 //要進去必須先登入
