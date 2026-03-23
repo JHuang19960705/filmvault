@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ContentService from "../../../../services/content.service";
 import Loader from "../../../../components/Loader";
-import Overlay from "../../../../components/Loader";
+import Overlay from "../../../../components/Overlay";
 
 export default function YourReviewsComment({ currentUser }) {
   const [reviewData, setReviewData] = useState(null);
