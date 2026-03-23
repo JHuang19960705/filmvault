@@ -182,7 +182,7 @@ router.get("/findByContentId/:_id", async (req, res) => {
 // 按讚
 router.patch("/clickLike/:contentId", async (req, res) => {
   let { contentId } = req.params;
-  let commenterId = req.user._id; // 從 JWT 取得真實身份，不信任前端傳來的值
+  let commenterId = req.user._id.toString(); // 從 JWT 取得真實身份，轉為字串以符合 like 陣列的 String 型別
   try {
     // 檢查用戶是否已經按過讚
     let content = await Content.findById(contentId).exec();

@@ -10,35 +10,38 @@ export default function ReviewsContent({ currentUser }) {
   const [contentData, setContentData] = useState([]); // 影評資料
   const [isLoading, setLoading] = useState(true); // 加載狀態
 
-  useEffect(() => {
-    let _id;
-
+  const fetchData = () => {
     if (currentUser) {
-      _id = TMDBId;
-
-      // 根據用戶角色發送不同的請求
-      if (currentUser.user.role === "standard" || currentUser.user.role === "premium") {
-        ContentService.getReviewsByTMDBId(_id)
-          .then((data) => {
-            setContentData(data.data); // 設定影評資料
-            setLoading(false);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      } else if (currentUser.user.role === "free") {
-        ContentService.getReviewsByTMDBId(_id)
-          .then((data) => {
-            setContentData(data.data); // 設定影評資料
-            setLoading(false);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      };
+      ContentService.getReviewsByTMDBId(TMDBId)
+        .then((data) => {
+          setContentData(data.data);
+          setLoading(false);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
+  };
 
+  useEffect(() => {
+    fetchData();
   }, [TMDBId]);
+
+  const handleClickLike = async () => {
+    if (!currentUser) return;
+    const reviewId = contentData[contentData.length - 1]._id;
+    try {
+      let response = await ContentService.patchLike(reviewId);
+      window.alert(response.data.message);
+      fetchData();
+    } catch (error) {
+      if (error.response && error.response.data) {
+        window.alert(error.response.data);
+      } else {
+        window.alert("按讚時發生錯誤。");
+      }
+    }
+  };
 
   const last = contentData.length - 1;
 
@@ -99,7 +102,20 @@ export default function ReviewsContent({ currentUser }) {
                   {contentData[last].content}
                 </div>
                 <div className="blog-title-like">
-                  <p>{contentData[last].like.length} 個讚</p>
+                  <div onClick={handleClickLike} style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "4px", cursor: "pointer" }}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      stroke="#1e478a"
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ width: "20px", fill: contentData[last] && contentData[last].like.map(String).includes(String(currentUser.user._id)) ? "#1e478a" : "none" }}
+                    >
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                    <span>{contentData[last].like.length} 個讚</span>
+                  </div>
                 </div>
               </div>
             </div>
