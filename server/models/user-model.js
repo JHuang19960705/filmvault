@@ -14,6 +14,7 @@ const userSchema = new Schema({
     type: String,
     minlength: 6,
     maxlength: 50,
+    unique: true, // 防止重複 email 導致第二個用戶帳號永久無法登入
   },
   password: {
     required: true,

@@ -105,7 +105,16 @@ router.post("/register", async (req, res) => {
     await newUser.save();
     return res.send({ msg: "歡迎加入" });
   } catch (e) {
-    res.status(500).send("無法儲存使用者...");
+    // 重複 email（MongoDB unique index 錯誤碼 11000）
+    if (e.code === 11000) {
+      return res.status(409).send("此信箱已被註冊，請使用其他信箱或直接登入。");
+    }
+    // Mongoose 格式驗證失敗（例如 email 格式、欄位長度、必填欄位）
+    if (e.name === "ValidationError") {
+      const messages = Object.values(e.errors).map((err) => err.message);
+      return res.status(400).send(messages.join(" "));
+    }
+    return res.status(500).send("無法儲存使用者...");
   }
 })
 
