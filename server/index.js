@@ -5,6 +5,7 @@ dotenv.config();
 const mongoose = require("mongoose");
 const authRoute = require("./routes").auth;
 const contentRoute = require("./routes").content;
+const adminRoute = require("./routes").admin;
 const passport = require("passport");
 require("./config/passport")(passport);
 const cors = require("cors");
@@ -34,6 +35,7 @@ app.use("/api/content",
   passport.authenticate("jwt", { session: false }),
   contentRoute
 );
+app.use("/api/admin", adminRoute);
 
 app.get("/" , (req, res) => {
   res.json("HELLO");

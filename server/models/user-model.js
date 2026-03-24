@@ -26,7 +26,7 @@ const userSchema = new Schema({
   role: {
     required: true,
     type: String,
-    enum: ["free", "standard", "premium"],
+    enum: ["free", "standard", "premium", "admin"],
   },
   date: {
     type: Date,
@@ -81,6 +81,10 @@ userSchema.methods.isStandard = function () {
 
 userSchema.methods.isPremium = function () {
   return this.role == "premium";
+};
+
+userSchema.methods.isAdmin = function () {
+  return this.role == "admin";
 };
 
 userSchema.methods.comparePassword = async function (password, cb) {

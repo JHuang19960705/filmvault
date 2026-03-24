@@ -38,6 +38,7 @@ import MovieDetail from "./pages/Search/SearchMovie/MovieDetail/MovieDetail";
 import PostMovieContent from "./pages/Search/SearchMovie/PostMovieContent/PostMovieContent";
 import Reviews from "./pages/Search/Reviews/Reviews";
 import Page404 from "./components/Page404";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
@@ -94,6 +95,7 @@ export default function App() {
               <Route path="reviews/:TMDBId" element={<Reviews currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
             </Route>
           </Route>
+          <Route path="admin" element={<AdminDashboard currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>

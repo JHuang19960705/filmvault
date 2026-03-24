@@ -24,6 +24,11 @@ export default function UserNav({ currentUser, setCurrentUser }) {
     navigate("/profile/patchRole");
   };
 
+  // 點擊管理後台
+  const handleAdmin = () => {
+    navigate("/admin");
+  };
+
   // 控制下拉選單的開啟與關閉
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -47,7 +52,11 @@ export default function UserNav({ currentUser, setCurrentUser }) {
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
         {/* 下拉選單內容 */}
-        <div className={`${isOpen ? "-bottom-[140px] md:-bottom-[167px] opacity-100" : "bottom-[170px] opacity-0"} absolute w-full flex flex-col ease-linear duration-300 bg-blue-500 text-white justify-center`}>
+        <div className={`${isOpen ? (currentUser?.user?.role === "admin" ? "-bottom-[180px] md:-bottom-[210px]" : "-bottom-[140px] md:-bottom-[167px]") + " opacity-100" : "bottom-[170px] opacity-0"} absolute w-full flex flex-col ease-linear duration-300 bg-blue-500 text-white justify-center`}>
+          {/* 管理後台按鈕（僅管理員可見） */}
+          {currentUser?.user?.role === "admin" && (
+            <button onClick={handleAdmin} className="w-full py-2 md:py-3 hover:scale-125 ease-linear duration-100 bg-red-500">管理</button>
+          )}
           {/* 方案修改按鈕 */}
           <button onClick={handleUserPlan} className="w-full py-2 md:py-3 hover:scale-125 ease-linear duration-100">方案</button>
           {/* 個人資料修改按鈕 */}
