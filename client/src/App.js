@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { UserProvider, useUser } from "./context/UserContext";
 import Loader from "./components/Loader";
@@ -7,7 +7,7 @@ import Loader from "./components/Loader";
 const FirstEnroll = lazy(() => import("./pages/First-Enroll/FirstEnroll"));
 const RegisterComponent = lazy(() => import("./pages/First-Enroll/Register/register-component"));
 const LoginComponent = lazy(() => import("./pages/First-Enroll/Login/login-component"));
-const Layout = lazy(() => import("./components/Layout"));
+import Layout from "./components/Layout";
 const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
 const PatchProfile = lazy(() => import("./pages/Homepage/PatchProfile/PatchProfile"));
 const PatchRole = lazy(() => import("./pages/Homepage/patchRole/PatchRole"));
