@@ -53,7 +53,7 @@ const AdminDashboard    = lazy(() => import(/* webpackChunkName: "admin-dashboar
  */
 const routeConfig = [
   {
-    path: "/firstEnroll",
+    path: "/first-enroll",
     Component: FirstEnroll,
     children: [
       { path: "register/:clickRole", Component: RegisterComponent },
@@ -64,12 +64,12 @@ const routeConfig = [
     path: "/",
     Component: Layout,
     children: [
-      { index: true,                      Component: Homepage,       protected: true },
-      { path: "profile/patchProfile",     Component: PatchProfile,   protected: true },
-      { path: "profile/patchRole",        Component: PatchRole,      protected: true },
-      { path: "profile/mockPayment",      Component: MockPayment,    protected: true },
+      { index: true,                       Component: Homepage,       protected: true },
+      { path: "profile/patch-profile",     Component: PatchProfile,   protected: true },
+      { path: "profile/patch-role",        Component: PatchRole,      protected: true },
+      { path: "profile/mock-payment",      Component: MockPayment,    protected: true },
       {
-        path: "allUser",
+        path: "all-user",
         Component: AllUser,
         protected: true,
         children: [
@@ -79,14 +79,14 @@ const routeConfig = [
             protected: true,
             children: [
               {
-                path: "userReviews",
+                path: "user-reviews",
                 Component: UserReviews,
                 children: [
                   { path: ":reviewId", Component: UserReviewsComment },
                 ],
               },
-              { path: "userRecommend", Component: UserRecommend },
-              { path: "userTheater",   Component: UserTheater },
+              { path: "user-recommend", Component: UserRecommend },
+              { path: "user-theater",   Component: UserTheater },
             ],
           },
         ],
@@ -97,36 +97,36 @@ const routeConfig = [
         protected: true,
         children: [
           {
-            path: "yourReviews",
+            path: "your-reviews",
             Component: YourReviews,
             children: [
               {
                 path: ":reviewId",
                 Component: PatchYourReview,
                 children: [
-                  { path: "reviewsComment", Component: ReviewsComment },
+                  { path: "reviews-comment", Component: ReviewsComment },
                 ],
               },
             ],
           },
           {
-            path: "yourRecommend",
+            path: "your-recommend",
             Component: Recommend,
             children: [
-              { path: "handleSlide",    Component: HandleSlide },
-              { path: "handleCasts",    Component: HandleCasts },
-              { path: "handleReview",   Component: HandleReview },
-              { path: "handleTheme",    Component: HandleTheme },
-              { path: "handleFavorite", Component: HandleFavorite },
+              { path: "handle-slide",    Component: HandleSlide },
+              { path: "handle-casts",    Component: HandleCasts },
+              { path: "handle-review",   Component: HandleReview },
+              { path: "handle-theme",    Component: HandleTheme },
+              { path: "handle-favorite", Component: HandleFavorite },
             ],
           },
           {
-            path: "yourTheater",
+            path: "your-theater",
             Component: HandleTheater,
             children: [
-              { path: "onTime",      Component: OnTime },
-              { path: "comingSoon",  Component: ComingSoon },
-              { path: "leavingSoon", Component: LeavingSoon },
+              { path: "on-time",      Component: OnTime },
+              { path: "coming-soon",  Component: ComingSoon },
+              { path: "leaving-soon", Component: LeavingSoon },
             ],
           },
         ],
@@ -139,18 +139,18 @@ const routeConfig = [
             path: "tv",
             Component: SearchTV,
             children: [
-              { path: ":TMDBId",                Component: TVDetail },
-              { path: "postTVContent/:TMDBId",  Component: PostTVContent },
-              { path: "reviews/:TMDBId",         Component: Reviews },
+              { path: ":TMDBId",                    Component: TVDetail },
+              { path: "post-tv-content/:TMDBId",    Component: PostTVContent },
+              { path: "reviews/:TMDBId",            Component: Reviews },
             ],
           },
           {
             path: "movie",
             Component: SearchMovie,
             children: [
-              { path: ":TMDBId",                   Component: MovieDetail },
-              { path: "postMovieContent/:TMDBId",   Component: PostMovieContent },
-              { path: "reviews/:TMDBId",             Component: Reviews },
+              { path: ":TMDBId",                    Component: MovieDetail },
+              { path: "post-movie-content/:TMDBId", Component: PostMovieContent },
+              { path: "reviews/:TMDBId",            Component: Reviews },
             ],
           },
         ],

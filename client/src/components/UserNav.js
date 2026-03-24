@@ -18,12 +18,12 @@ export default function UserNav() {
 
   // 點擊修改個人資料按鈕的處理函數，導向修改個人資料頁面
   const handleUserPatch = () => {
-    navigate("/profile/patchProfile");
+    navigate("/profile/patch-profile");
   };
 
   // 點擊修改方案按鈕的處理函數，導向修改方案頁面
   const handleUserPlan = () => {
-    navigate("/profile/patchRole");
+    navigate("/profile/patch-role");
   };
 
   // 點擊管理後台

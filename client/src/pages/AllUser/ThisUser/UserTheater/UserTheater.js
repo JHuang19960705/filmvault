@@ -16,7 +16,7 @@ export default function UserTheater() {
 
   // 返回上一頁
   const goBackHandler = () => {
-    navigate(`/allUser/${userId}/userReviews`);
+    navigate(`/all-user/${userId}/user-reviews`);
   };
 
   // 獲取使用者推薦資料

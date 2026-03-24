@@ -42,7 +42,7 @@ export default function Reviews({ userRecommend }) {
                 <p>解放出來</p>
               </div>
               <div>
-                <button className="media-studies-more" id="media-studies-more" onClick={() => { userRecommend._id && navigate(`/allUser/${userRecommend._id}/userReviews`) }} >
+                <button className="media-studies-more" id="media-studies-more" onClick={() => { userRecommend._id && navigate(`/all-user/${userRecommend._id}/user-reviews`) }} >
                   <div className="media-studies-link">
                     更多影評
                   </div>

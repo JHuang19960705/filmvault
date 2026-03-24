@@ -121,7 +121,7 @@ export default function YourReviewsComment() {
     <div className="movie-comment-system">
       {isLoading && <Loader />}
       {isLoading && <Overlay />}
-      <button onClick={() => navigate(`/back/yourReviews/${reviewId}`)} className="absolute right-4 top-4 px-3 py-1 bg-gray-100 rounded-md dark:text-black">返回</button>
+      <button onClick={() => navigate(`/back/your-reviews/${reviewId}`)} className="absolute right-4 top-4 px-3 py-1 bg-gray-100 rounded-md dark:text-black">返回</button>
       <div className="movie-user">
         {/* <!-- 左半邊 --> */}
         <div className="movie-user-left">

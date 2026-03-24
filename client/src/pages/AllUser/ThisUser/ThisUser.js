@@ -80,10 +80,14 @@ export default function ThisUser() {
           </div>
           {/* 設置連結 */}
           <div className="flex items-center justify-between md:justify-start space-x-3 md:mt-7 mt-4">
-            {["Reviews", "Recommend", "Theater"].map((linkName) => (
+            {[
+              { name: "Reviews",   path: "user-reviews"   },
+              { name: "Recommend", path: "user-recommend" },
+              { name: "Theater",   path: "user-theater"   },
+            ].map(({ name: linkName, path }) => (
               <Link
                 key={linkName}
-                to={`user${linkName}`}
+                to={path}
                 onClick={() => handleLinkClick(linkName)}
                 className={`truncate md:px-3 pb-1.5 border-b-2 cursor-pointer ${selectedLink === linkName ? "border-blue-500 text-blue-500 dark:border-gray-100  dark:text-gray-100" : "dark:text-gray-400 border-transparent"
                   }`}

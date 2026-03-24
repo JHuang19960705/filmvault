@@ -17,7 +17,7 @@ export default function Search() {
   // 確保使用者已登入，否則導向首次註冊頁面
   const checkCurrentUser = () => {
     if (!currentUser) {
-      navigate("/firstEnroll");
+      navigate("/first-enroll");
     }
   };
 

@@ -50,7 +50,7 @@ export default function PatchProfile() {
         await AuthService.deleteUser(currentUser.user._id);
         window.alert("刪除帳號成功。您現在將被導向到登入畫面");
         setCurrentUser(null);
-        navigate("/firstEnroll");
+        navigate("/first-enroll");
       } catch (e) {
         if (e.response && e.response.data) {
           window.alert(e.response.data.message);

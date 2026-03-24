@@ -13,17 +13,17 @@ export default function Profile() {
     window.alert("登出成功。您現在將被重新導向到首頁。");
     setCurrentUser(null);
     AuthService.logout();
-    navigate("/firstEnroll");
+    navigate("/first-enroll");
   };
 
   // 導航至修改個人資料頁面
   const handleUserPatch = () => {
-    navigate("/profile/patchProfile");
+    navigate("/profile/patch-profile");
   };
 
   // 導航至更改方案頁面
   const handleUserPlan = () => {
-    navigate("/profile/patchRole");
+    navigate("/profile/patch-role");
   };
 
   // 控制下拉選單顯示與隱藏

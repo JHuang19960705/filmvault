@@ -58,7 +58,7 @@ export default function PostTVContent () {
     ContentService.post(title, content, tags, getTMDBId, TMDBImg)
       .then(() => {
         window.alert("您的影評成功上傳");
-        navigate("/back/yourReviews");
+        navigate("/back/your-reviews");
       })
       .catch((error) => {
         console.log(error.response);

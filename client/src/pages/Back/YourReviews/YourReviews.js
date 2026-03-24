@@ -47,7 +47,7 @@ export default function YourReviews() {
 
   // 根據路由中的字來決定呼籲點擊的顯示與否
   const handleClick = () => {
-    if (location.pathname === "/back/yourReviews") {
+    if (location.pathname === "/back/your-reviews") {
       setClickContent(false); // 顯示呼籲點擊
     } else {
       setClickContent(true); // 隱藏呼籲點擊

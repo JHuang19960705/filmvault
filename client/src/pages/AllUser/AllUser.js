@@ -25,7 +25,7 @@ export default function AllUser() {
   // 如果沒有當前用戶，導向首次登錄頁面
   const checkCurrentUser = () => {
     if (!currentUser) {
-      navigate("/firstEnroll");
+      navigate("/first-enroll");
     };
   };
 
@@ -43,7 +43,7 @@ export default function AllUser() {
 
   // 根據路由的字來決定呼籲點擊的顯示與否
   const handleClick = () => {
-    if (location.pathname === "/allUser") {
+    if (location.pathname === "/all-user") {
       setClickUser(false); // 顯示呼籲點擊
     } else {
       setClickUser(true); // 隱藏呼籲點擊
@@ -113,7 +113,7 @@ export default function AllUser() {
                 {isLoading && <div>Loading...<Loader /></div>}
                 {allUser && allUser.map((user) => {
                   return (
-                    <Link to={`${user._id}/userReviews`} onClick={() => { handleChange(user._id); handleClickTitle(user.username) }} className="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                    <Link to={`${user._id}/user-reviews`} onClick={() => { handleChange(user._id); handleClickTitle(user.username) }} className="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
                       <div className="truncate flex md:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 md:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
                         {user.username}
                       </div>

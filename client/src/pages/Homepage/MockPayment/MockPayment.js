@@ -35,7 +35,7 @@ export default function MockPayment() {
   const [errorMsg, setErrorMsg] = useState("");
 
   if (!plan || !PLAN_INFO[plan]) {
-    navigate("/profile/patchRole");
+    navigate("/profile/patch-role");
     return null;
   }
 
@@ -100,7 +100,7 @@ export default function MockPayment() {
         <div className="mb-5 flex items-center justify-between">
           <h2 className="text-lg font-bold sm:text-xl">付款資訊</h2>
           <button
-            onClick={() => navigate("/profile/patchRole")}
+            onClick={() => navigate("/profile/patch-role")}
             className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400"
           >
             ← 返回

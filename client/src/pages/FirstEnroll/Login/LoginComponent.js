@@ -57,7 +57,7 @@ export default function LoginComponent() {
         {loading && <Loader />} {/* 如果 loading 為 true，顯示 Loader */}
         {loading && <Overlay />} {/* 如果 loading 為 true，顯示 Overlay */}
         {/* 返回按鈕 */}
-        <div onClick={() => { navigate("/firstEnroll") }} className="absolute right-1 top-1 h-5 w-5 cursor-pointer bg-white">
+        <div onClick={() => { navigate("/first-enroll") }} className="absolute right-1 top-1 h-5 w-5 cursor-pointer bg-white">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
             <path fill="none" d="M0 0h24v24H0z" />
             <path d="M12 10.586l-4.293-4.293-1.414 1.414L10.586 12l-4.293 4.293 1.414 1.414L12 13.414l4.293 4.293 1.414-1.414L13.414 12l4.293-4.293-1.414-1.414L12 10.586z" />

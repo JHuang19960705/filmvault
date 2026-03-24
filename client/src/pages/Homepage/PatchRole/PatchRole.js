@@ -25,7 +25,7 @@ export default function PatchRole() {
 
   // 升級方案 → 導向假金流付款頁
   const handleUpgradeClick = (plan) => {
-    navigate(`/profile/mockPayment?plan=${plan}`);
+    navigate(`/profile/mock-payment?plan=${plan}`);
   };
 
   return (

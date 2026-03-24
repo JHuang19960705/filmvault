@@ -71,7 +71,7 @@ export default function PatchYourReview() {
     if (confirmDelete) {
       try {
         await ContentService.delete(reviewId);
-        navigate("/back/yourReviews");
+        navigate("/back/your-reviews");
         setTimeout(() => { navigate(0); }, 1);
       } catch (error) {
         setMessage(error.response);
@@ -103,7 +103,7 @@ export default function PatchYourReview() {
         </div>
         <div className="mb-5 flex justify-between md:justify-end">
           <button onClick={handleDelete} className="text-xs px-2 py-1 rounded border border-gray-200 bg-gray-50 md:px-5 md:py-1 font-bold text-gray-300 shadow-sm">刪除影評</button>
-          <Link to="reviewsComment" className="text-xs px-2 py-1 rounded border border-blue-200 bg-blue-50 md:px-5 md:py-1 font-bold text-blue-400 shadow-sm">查看回覆</Link>
+          <Link to="reviews-comment" className="text-xs px-2 py-1 rounded border border-blue-200 bg-blue-50 md:px-5 md:py-1 font-bold text-blue-400 shadow-sm">查看回覆</Link>
           <button onClick={patchReview} className="text-xs px-2 py-1 rounded border border-blue-300 bg-blue-100 md:px-5 md:py-1 font-bold text-blue-500 shadow-sm">修改上傳</button>
         </div>
         {message && (

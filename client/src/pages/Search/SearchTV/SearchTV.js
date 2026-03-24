@@ -102,7 +102,7 @@ export default function SearchTV() {
                       </div>
                       {currentUser && currentUser.user.role !== "free" && (
                         <div className="w-full flex justify-around text-base text-gray-400 pt-3">
-                          <Link to={`postTVContent/${d.id}`} onClick={() => { handleClickTitle(d.original_name) }} className="border-b border-transparent hover:text-gray-800 hover:border-b hover:border-gray-800 dark:hover:border-gray-300 dark:hover:text-gray-300">
+                          <Link to={`post-tv-content/${d.id}`} onClick={() => { handleClickTitle(d.original_name) }} className="border-b border-transparent hover:text-gray-800 hover:border-b hover:border-gray-800 dark:hover:border-gray-300 dark:hover:text-gray-300">
                             寫影評
                           </Link>
                           <Link to={`reviews/${d.id}`} onClick={() => { handleClickTitle(d.original_name) }} className="border-b border-transparent hover:text-gray-800 hover:border-b hover:border-gray-800 dark:hover:border-gray-300 dark:hover:text-gray-300">

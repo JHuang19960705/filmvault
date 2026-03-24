@@ -43,15 +43,15 @@ export default function HandleTheater() {
         <div className={`${isDisplay} w-full flex-shrink-0 overflow-y-auto border-r border-gray-200 bg-gray-100 p-5 md:static md:block md:w-1/4 md:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 md:dark:bg-gray-900`}>
           <div className="space-y-4 mt-3">
             {/* 熱映中連結 */}
-            <Link to="onTime" onClick={() => { handleClickTitle("熱映中"); handleLinkClick("熱映中") }} className={`${selectedLink === "熱映中" ? "ring-2 ring-blue-500" : ""} bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow focus:outline-none`}>
+            <Link to="on-time" onClick={() => { handleClickTitle("熱映中"); handleLinkClick("熱映中") }} className={`${selectedLink === "熱映中" ? "ring-2 ring-blue-500" : ""} bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow focus:outline-none`}>
               <div className="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">熱映中</div>
             </Link>
             {/* 近期上映連結 */}
-            <Link to="comingSoon" onClick={() => { handleClickTitle("近期上映"); handleLinkClick("近期上映") }} className={`${selectedLink === "近期上映" ? "ring-2 ring-blue-500" : ""} bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow focus:outline-none`}>
+            <Link to="coming-soon" onClick={() => { handleClickTitle("近期上映"); handleLinkClick("近期上映") }} className={`${selectedLink === "近期上映" ? "ring-2 ring-blue-500" : ""} bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow focus:outline-none`}>
               <div className="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">近期上映</div>
             </Link>
             {/* 即將下映連結 */}
-            <Link to="leavingSoon" onClick={() => { handleClickTitle("即將下映"); handleLinkClick("即將下映") }} className={`${selectedLink === "即將下映" ? "ring-2 ring-blue-500" : ""} bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow focus:outline-none`}>
+            <Link to="leaving-soon" onClick={() => { handleClickTitle("即將下映"); handleLinkClick("即將下映") }} className={`${selectedLink === "即將下映" ? "ring-2 ring-blue-500" : ""} bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow focus:outline-none`}>
               <div className="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">即將下映</div>
             </Link>
           </div>

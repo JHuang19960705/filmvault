@@ -33,7 +33,7 @@ export default function RegisterComponent() {
       .then(() => {
         // 註冊成功，導航至登錄頁面
         window.alert("註冊成功。您現在將被導向到登入頁面");
-        navigate("/firstEnroll/login");
+        navigate("/first-enroll/login");
       })
       .catch((e) => {
         // 若註冊失敗，則顯示錯誤消息
@@ -51,7 +51,7 @@ export default function RegisterComponent() {
   return (
     <div className="fixed left-1/2 top-24 z-10 w-3/5 min-w-52 -translate-x-1/2 rounded-lg border border-blue-400 bg-blue-100 p-5 shadow-xl dark:bg-gray-700 dark:border-gray-400">
       {/* 返回按鈕 */}
-      <div onClick={() => { navigate("/firstEnroll") }} className="absolute right-1 top-1 h-5 w-5 cursor-pointer bg-white">
+      <div onClick={() => { navigate("/first-enroll") }} className="absolute right-1 top-1 h-5 w-5 cursor-pointer bg-white">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
           <path fill="none" d="M0 0h24v24H0z" />
           <path d="M12 10.586l-4.293-4.293-1.414 1.414L10.586 12l-4.293 4.293 1.414 1.414L12 13.414l4.293 4.293 1.414-1.414L13.414 12l4.293-4.293-1.414-1.414L12 10.586z" />

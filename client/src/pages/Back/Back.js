@@ -16,22 +16,20 @@ export default function Back() {
 
   // 根據URL判斷點擊
   const checkURL = () => {
-    // 抓取URL的第12個字母
-    const char12 = location.pathname.charAt(12);
-
-    if (char12 === "v") {
-      setSelectedLink("yourReviews");
-    } else if (char12 === "c") {
-      setSelectedLink("yourRecommend/handleSlide"); 
-    } else if (char12 === "e") {
-      setSelectedLink("yourTheater/onTime")
+    const pathname = location.pathname;
+    if (pathname.includes("your-reviews")) {
+      setSelectedLink("your-reviews");
+    } else if (pathname.includes("your-recommend")) {
+      setSelectedLink("your-recommend/handle-slide");
+    } else if (pathname.includes("your-theater")) {
+      setSelectedLink("your-theater/on-time");
     };
   };
 
   // 如果沒有當前用戶，導向首次登錄頁面
   const checkCurrentUser = () => {
     if (!currentUser) {
-      navigate("/firstEnroll");
+      navigate("/first-enroll");
     }
   }
 
@@ -42,9 +40,9 @@ export default function Back() {
 
   // 導覽連結
   const links = [
-    { name: "yourReviews", label: "Reviews" },
-    { name: "yourRecommend/handleSlide", label: "Recommend" },
-    { name: "yourTheater/onTime", label: "Theater" }
+    { name: "your-reviews", label: "Reviews" },
+    { name: "your-recommend/handle-slide", label: "Recommend" },
+    { name: "your-theater/on-time", label: "Theater" }
   ];
 
   return (
