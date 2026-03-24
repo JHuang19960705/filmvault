@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ProfileComponent from "./Profile/profile";
+import ProfileComponent from "./Profile/Profile";
 import { useUser } from "../../context/UserContext";
 
 export default function Homepage() {

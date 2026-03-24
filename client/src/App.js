@@ -4,13 +4,13 @@ import { UserProvider, useUser } from "./context/UserContext";
 import Loader from "./components/Loader";
 
 // 懶載入所有頁面元件（Code Splitting）
-const FirstEnroll = lazy(() => import(/* webpackChunkName: "first-enroll" */ "./pages/First-Enroll/FirstEnroll"));
-const RegisterComponent = lazy(() => import(/* webpackChunkName: "register" */ "./pages/First-Enroll/Register/register-component"));
-const LoginComponent = lazy(() => import(/* webpackChunkName: "login" */ "./pages/First-Enroll/Login/login-component"));
+const FirstEnroll = lazy(() => import(/* webpackChunkName: "first-enroll" */ "./pages/FirstEnroll/FirstEnroll"));
+const RegisterComponent = lazy(() => import(/* webpackChunkName: "register" */ "./pages/FirstEnroll/Register/RegisterComponent"));
+const LoginComponent = lazy(() => import(/* webpackChunkName: "login" */ "./pages/FirstEnroll/Login/LoginComponent"));
 import Layout from "./components/Layout";
 const Homepage = lazy(() => import(/* webpackChunkName: "homepage" */ "./pages/Homepage/Homepage"));
 const PatchProfile = lazy(() => import(/* webpackChunkName: "patch-profile" */ "./pages/Homepage/PatchProfile/PatchProfile"));
-const PatchRole = lazy(() => import(/* webpackChunkName: "patch-role" */ "./pages/Homepage/patchRole/PatchRole"));
+const PatchRole = lazy(() => import(/* webpackChunkName: "patch-role" */ "./pages/Homepage/PatchRole/PatchRole"));
 const MockPayment = lazy(() => import(/* webpackChunkName: "mock-payment" */ "./pages/Homepage/MockPayment/MockPayment"));
 const AllUser = lazy(() => import(/* webpackChunkName: "all-user" */ "./pages/AllUser/AllUser"));
 const ThisUser = lazy(() => import(/* webpackChunkName: "this-user" */ "./pages/AllUser/ThisUser/ThisUser"));
