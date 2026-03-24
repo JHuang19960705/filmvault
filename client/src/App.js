@@ -74,7 +74,7 @@ export default function App() {
               <Route path="profile/patchRole" element={<ProtectedRoute><PatchRole /></ProtectedRoute>} />
               <Route path="profile/mockPayment" element={<ProtectedRoute><MockPayment /></ProtectedRoute>} />
               <Route path="allUser" element={<ProtectedRoute><AllUser /></ProtectedRoute>}>
-                <Route path=":userId" element={<ThisUser />}>
+                <Route path=":userId" element={<ProtectedRoute><ThisUser /></ProtectedRoute>}>
                   <Route path="userReviews" element={<UserReviews />}>
                     <Route path=":reviewId" element={<UserReviewsComment />} />
                   </Route>
