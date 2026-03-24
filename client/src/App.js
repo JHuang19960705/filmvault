@@ -40,6 +40,8 @@ export default function App() {
   return (
     <UserProvider>
       <Router>
+        {/* 外層 Suspense：殼層尚未渲染時（如 FirstEnroll）顯示全螢幕 Loader */}
+        {/* Layout 內部的頁面切換由 Layout.js 裡的 <Suspense> 接手，只更新內容區 */}
         <Suspense fallback={<Loader />}>
           <Routes>
             {renderRoutes(routeConfig)}

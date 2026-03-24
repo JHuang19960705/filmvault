@@ -20,6 +20,13 @@
   }
 }
 
+/* 內容區 Loader（殼層已顯示，僅 Outlet 內容在載入） */
+.content-loader-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 100vh;
+}
+
 .loader {
   width: 55px;
   aspect-ratio: 1;

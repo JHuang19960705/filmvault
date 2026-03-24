@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
+import ContentLoader from "./ContentLoader";
 
 export default function Layout() {
   const location = useLocation();
@@ -68,7 +69,9 @@ export default function Layout() {
             </Link>
           </div>
         </div>
-        <Outlet />
+        <Suspense fallback={<ContentLoader />}>
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );
