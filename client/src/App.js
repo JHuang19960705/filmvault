@@ -44,9 +44,9 @@ const Page404 = lazy(() => import("./components/Page404"));
 const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"));
 
 // 集中授權守衛：未登入直接導回首頁
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children, redirectTo = "/firstEnroll" }) {
   const { currentUser } = useUser();
-  if (!currentUser) return <Navigate to="/firstEnroll" replace />;
+  if (!currentUser) return <Navigate to={redirectTo} replace />;
   return children;
 }
 
