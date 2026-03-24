@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import AdminService from "../../services/admin.service";
 import UserNav from "../../components/UserNav";
-import { useUser } from "../../context/UserContext";
 
 // ──────────────────────────────────────────────────────────
 //  角色顏色 badge
@@ -340,8 +338,6 @@ function SetupAdminModal({ onClose }) {
 //  主 Dashboard
 // ══════════════════════════════════════════════════════════
 export default function AdminDashboard() {
-  const { currentUser } = useUser();
-  const navigate = useNavigate();
   const [tab, setTab] = useState("users"); // "users" | "content"
 
   // 用戶管理狀態
@@ -359,12 +355,6 @@ export default function AdminDashboard() {
 
   // 共用
   const [showSetupModal, setShowSetupModal] = useState(false);
-
-  // ── 權限守衛 ──
-  useEffect(() => {
-    if (!currentUser) return navigate("/firstEnroll");
-    if (currentUser.user.role !== "admin") return navigate("/");
-  }, [currentUser]);
 
   // ── 載入資料 ──
   useEffect(() => {

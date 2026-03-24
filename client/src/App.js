@@ -50,6 +50,14 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
+// 管理員守衛：未登入導回 firstEnroll，非 admin 導回首頁
+function AdminRoute({ children }) {
+  const { currentUser } = useUser();
+  if (!currentUser) return <Navigate to="/firstEnroll" replace />;
+  if (currentUser.user?.role !== "admin") return <Navigate to="/" replace />;
+  return children;
+}
+
 export default function App() {
   return (
     <UserProvider>
@@ -105,7 +113,7 @@ export default function App() {
                   <Route path="reviews/:TMDBId" element={<Reviews />} />
                 </Route>
               </Route>
-              <Route path="admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+              <Route path="admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
               <Route path="*" element={<Page404 />} />
             </Route>
           </Routes>
