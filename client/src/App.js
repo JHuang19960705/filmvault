@@ -64,7 +64,7 @@ export default function App() {
       <Router>
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="firstEnroll" element={<FirstEnroll />}>
+            <Route path="/firstEnroll" element={<FirstEnroll />}>
               <Route path="register/:clickRole" element={<RegisterComponent />} />
               <Route path="login" element={<LoginComponent />} />
             </Route>
