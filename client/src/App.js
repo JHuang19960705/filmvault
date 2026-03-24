@@ -1,104 +1,118 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import AuthService from "./services/auth.service";
-import FirstEnroll from "./pages/First-Enroll/FirstEnroll";
-import RegisterComponent from "./pages/First-Enroll/Register/register-component";
-import LoginComponent from "./pages/First-Enroll/Login/login-component";
-import Layout from "./components/Layout";
-import Homepage from "./pages/Homepage/Homepage";
-import PatchProfile from "./pages/Homepage/PatchProfile/PatchProfile";
-import PatchRole from "./pages/Homepage/patchRole/PatchRole";
-import MockPayment from "./pages/Homepage/MockPayment/MockPayment";
-import AllUser from "./pages/AllUser/AllUser";
-import ThisUser from "./pages/AllUser/ThisUser/ThisUser";
-import UserReviews from "./pages/AllUser/ThisUser/UserReviews/UserReviews";
-import UserReviewsComment from "./pages/AllUser/ThisUser/UserReviews/UserReviewsComment/UserReviewsComment";
-import UserRecommend from "./pages/AllUser/ThisUser/UserRecommend/UserRecommend";
-import UserTheater from "./pages/AllUser/ThisUser/UserTheater/UserTheater";
-import Back from "./pages/Back/Back";
-import YourReviews from "./pages/Back/YourReviews/YourReviews";
-import ReviewsComment from "./pages/Back/YourReviews/ReviewsComment/ReviewsComment";
-import PatchYourReview from "./pages/Back/YourReviews/PatchYourReview/PatchYourReview";
-import Recommend from "./pages/Back/Recommend/Recommend";
-import HandleSlide from "./pages/Back/Recommend/HandleSlide/HandleSlide";
-import HandleCasts from "./pages/Back/Recommend/HandleCasts/HandleCasts";
-import HandleReview from "./pages/Back/Recommend/HandleReview/HandleReview";
-import HandleTheme from "./pages/Back/Recommend/HandleTheme/HandleTheme";
-import HandleFavorite from "./pages/Back/Recommend/HandleFavorite/HandleFavorite";
-import HandleTheater from "./pages/Back/Theater/HandleTheater";
-import ComingSoon from "./pages/Back/Theater/ComingSoon/ComingSoon";
-import OnTime from "./pages/Back/Theater/OnTime/OnTime";
-import LeavingSoon from "./pages/Back/Theater/LeavingSoon/LeavingSoon";
-import Search from "./pages/Search/Search";
-import SearchTV from "./pages/Search/SearchTV/SearchTV";
-import TVDetail from "./pages/Search/SearchTV/TVDetail/TVDetail";
-import PostTVContent from "./pages/Search/SearchTV/PostTVContent/PostTVContent";
-import SearchMovie from "./pages/Search/SearchMovie/SearchMovie";
-import MovieDetail from "./pages/Search/SearchMovie/MovieDetail/MovieDetail";
-import PostMovieContent from "./pages/Search/SearchMovie/PostMovieContent/PostMovieContent";
-import Reviews from "./pages/Search/Reviews/Reviews";
-import Page404 from "./components/Page404";
-import AdminDashboard from "./pages/Admin/AdminDashboard";
+import Loader from "./components/Loader";
+
+// 懶載入所有頁面元件（Code Splitting）
+const FirstEnroll = lazy(() => import("./pages/First-Enroll/FirstEnroll"));
+const RegisterComponent = lazy(() => import("./pages/First-Enroll/Register/register-component"));
+const LoginComponent = lazy(() => import("./pages/First-Enroll/Login/login-component"));
+const Layout = lazy(() => import("./components/Layout"));
+const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
+const PatchProfile = lazy(() => import("./pages/Homepage/PatchProfile/PatchProfile"));
+const PatchRole = lazy(() => import("./pages/Homepage/patchRole/PatchRole"));
+const MockPayment = lazy(() => import("./pages/Homepage/MockPayment/MockPayment"));
+const AllUser = lazy(() => import("./pages/AllUser/AllUser"));
+const ThisUser = lazy(() => import("./pages/AllUser/ThisUser/ThisUser"));
+const UserReviews = lazy(() => import("./pages/AllUser/ThisUser/UserReviews/UserReviews"));
+const UserReviewsComment = lazy(() => import("./pages/AllUser/ThisUser/UserReviews/UserReviewsComment/UserReviewsComment"));
+const UserRecommend = lazy(() => import("./pages/AllUser/ThisUser/UserRecommend/UserRecommend"));
+const UserTheater = lazy(() => import("./pages/AllUser/ThisUser/UserTheater/UserTheater"));
+const Back = lazy(() => import("./pages/Back/Back"));
+const YourReviews = lazy(() => import("./pages/Back/YourReviews/YourReviews"));
+const ReviewsComment = lazy(() => import("./pages/Back/YourReviews/ReviewsComment/ReviewsComment"));
+const PatchYourReview = lazy(() => import("./pages/Back/YourReviews/PatchYourReview/PatchYourReview"));
+const Recommend = lazy(() => import("./pages/Back/Recommend/Recommend"));
+const HandleSlide = lazy(() => import("./pages/Back/Recommend/HandleSlide/HandleSlide"));
+const HandleCasts = lazy(() => import("./pages/Back/Recommend/HandleCasts/HandleCasts"));
+const HandleReview = lazy(() => import("./pages/Back/Recommend/HandleReview/HandleReview"));
+const HandleTheme = lazy(() => import("./pages/Back/Recommend/HandleTheme/HandleTheme"));
+const HandleFavorite = lazy(() => import("./pages/Back/Recommend/HandleFavorite/HandleFavorite"));
+const HandleTheater = lazy(() => import("./pages/Back/Theater/HandleTheater"));
+const ComingSoon = lazy(() => import("./pages/Back/Theater/ComingSoon/ComingSoon"));
+const OnTime = lazy(() => import("./pages/Back/Theater/OnTime/OnTime"));
+const LeavingSoon = lazy(() => import("./pages/Back/Theater/LeavingSoon/LeavingSoon"));
+const Search = lazy(() => import("./pages/Search/Search"));
+const SearchTV = lazy(() => import("./pages/Search/SearchTV/SearchTV"));
+const TVDetail = lazy(() => import("./pages/Search/SearchTV/TVDetail/TVDetail"));
+const PostTVContent = lazy(() => import("./pages/Search/SearchTV/PostTVContent/PostTVContent"));
+const SearchMovie = lazy(() => import("./pages/Search/SearchMovie/SearchMovie"));
+const MovieDetail = lazy(() => import("./pages/Search/SearchMovie/MovieDetail/MovieDetail"));
+const PostMovieContent = lazy(() => import("./pages/Search/SearchMovie/PostMovieContent/PostMovieContent"));
+const Reviews = lazy(() => import("./pages/Search/Reviews/Reviews"));
+const Page404 = lazy(() => import("./components/Page404"));
+const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"));
+
+// 集中授權守衛：未登入直接導回首頁
+function ProtectedRoute({ currentUser, children }) {
+  if (!currentUser) return <Navigate to="/firstEnroll" replace />;
+  return children;
+}
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
 
+  // 避免每個 Route 重複寫兩次 prop
+  const userProps = { currentUser, setCurrentUser };
+
   return (
     <Router>
-      <Routes>
-        <Route path="firstEnroll" element={<FirstEnroll currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-          <Route path="register/:clickRole" element={<RegisterComponent currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
-          <Route path="login" element={<LoginComponent currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
-        </Route>
-        <Route path="/" element={<Layout currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-          <Route index element={<Homepage currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-          <Route path="profile/patchProfile" element={<PatchProfile currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-          <Route path="profile/patchRole" element={<PatchRole currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
-          <Route path="profile/mockPayment" element={<MockPayment currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
-          <Route path="allUser" element={<AllUser currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-            <Route path=":userId" element={<ThisUser currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-              <Route path="userReviews" element={<UserReviews currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-                <Route path=":reviewId" element={<UserReviewsComment currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              </Route>
-              <Route path="userRecommend" element={<UserRecommend currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="userTheater" element={<UserTheater currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-            </Route>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="firstEnroll" element={<FirstEnroll {...userProps} />}>
+            <Route path="register/:clickRole" element={<RegisterComponent {...userProps} />} />
+            <Route path="login" element={<LoginComponent {...userProps} />} />
           </Route>
-          <Route path="back" element={<Back currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-            <Route path="yourReviews" element={<YourReviews currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-              <Route path=":reviewId" element={<PatchYourReview currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-                <Route path="reviewsComment" element={<ReviewsComment currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<ProtectedRoute currentUser={currentUser}><Homepage {...userProps} /></ProtectedRoute>} />
+            <Route path="profile/patchProfile" element={<ProtectedRoute currentUser={currentUser}><PatchProfile {...userProps} /></ProtectedRoute>} />
+            <Route path="profile/patchRole" element={<ProtectedRoute currentUser={currentUser}><PatchRole {...userProps} /></ProtectedRoute>} />
+            <Route path="profile/mockPayment" element={<ProtectedRoute currentUser={currentUser}><MockPayment {...userProps} /></ProtectedRoute>} />
+            <Route path="allUser" element={<ProtectedRoute currentUser={currentUser}><AllUser {...userProps} /></ProtectedRoute>}>
+              <Route path=":userId" element={<ThisUser {...userProps} />}>
+                <Route path="userReviews" element={<UserReviews {...userProps} />}>
+                  <Route path=":reviewId" element={<UserReviewsComment {...userProps} />} />
+                </Route>
+                <Route path="userRecommend" element={<UserRecommend {...userProps} />} />
+                <Route path="userTheater" element={<UserTheater {...userProps} />} />
               </Route>
             </Route>
-            <Route path="yourRecommend" element={<Recommend currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-              <Route path="handleSlide" element={<HandleSlide currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="handleCasts" element={<HandleCasts currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="handleReview" element={<HandleReview currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="handleTheme" element={<HandleTheme currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="handleFavorite" element={<HandleFavorite currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
+            <Route path="back" element={<ProtectedRoute currentUser={currentUser}><Back {...userProps} /></ProtectedRoute>}>
+              <Route path="yourReviews" element={<YourReviews {...userProps} />}>
+                <Route path=":reviewId" element={<PatchYourReview {...userProps} />}>
+                  <Route path="reviewsComment" element={<ReviewsComment {...userProps} />} />
+                </Route>
+              </Route>
+              <Route path="yourRecommend" element={<Recommend {...userProps} />}>
+                <Route path="handleSlide" element={<HandleSlide {...userProps} />} />
+                <Route path="handleCasts" element={<HandleCasts {...userProps} />} />
+                <Route path="handleReview" element={<HandleReview {...userProps} />} />
+                <Route path="handleTheme" element={<HandleTheme {...userProps} />} />
+                <Route path="handleFavorite" element={<HandleFavorite {...userProps} />} />
+              </Route>
+              <Route path="yourTheater" element={<HandleTheater {...userProps} />}>
+                <Route path="onTime" element={<OnTime {...userProps} />} />
+                <Route path="comingSoon" element={<ComingSoon {...userProps} />} />
+                <Route path="leavingSoon" element={<LeavingSoon {...userProps} />} />
+              </Route>
             </Route>
-            <Route path="yourTheater" element={<HandleTheater currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-              <Route path="onTime" element={<OnTime currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
-              <Route path="comingSoon" element={<ComingSoon currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
-              <Route path="leavingSoon" element={<LeavingSoon currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
+            <Route path="search" element={<Search {...userProps} />}>
+              <Route path="tv" element={<SearchTV {...userProps} />}>
+                <Route path=":TMDBId" element={<TVDetail {...userProps} />} />
+                <Route path="postTVContent/:TMDBId" element={<PostTVContent {...userProps} />} />
+                <Route path="reviews/:TMDBId" element={<Reviews {...userProps} />} />
+              </Route>
+              <Route path="movie" element={<SearchMovie {...userProps} />}>
+                <Route path=":TMDBId" element={<MovieDetail {...userProps} />} />
+                <Route path="postMovieContent/:TMDBId" element={<PostMovieContent {...userProps} />} />
+                <Route path="reviews/:TMDBId" element={<Reviews {...userProps} />} />
+              </Route>
             </Route>
+            <Route path="admin" element={<ProtectedRoute currentUser={currentUser}><AdminDashboard {...userProps} /></ProtectedRoute>} />
+            <Route path="*" element={<Page404 />} />
           </Route>
-          <Route path="search" element={<Search currentUser={currentUser} setCurrentUser={setCurrentUser} />}>
-            <Route path="TV" element={<SearchTV currentUser={currentUser} setCurrentUser={setCurrentUser} />} >
-              <Route path=":TMDBId" element={<TVDetail currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="postTVContent/:TMDBId" element={<PostTVContent currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="reviews/:TMDBId" element={<Reviews currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-            </Route>
-            <Route path="Movie" element={<SearchMovie currentUser={currentUser} setCurrentUser={setCurrentUser} />} >
-              <Route path=":TMDBId" element={<MovieDetail currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="postMovieContent/:TMDBId" element={<PostMovieContent currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-              <Route path="reviews/:TMDBId" element={<Reviews currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-            </Route>
-          </Route>
-          <Route path="admin" element={<AdminDashboard currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-          <Route path="*" element={<Page404 />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

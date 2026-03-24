@@ -58,7 +58,7 @@ export default function Layout() {
               </svg>
             </Link>
             {/* 搜尋 */}
-            <Link to="search/Movie" onClick={() => setSelectedLink("search")} className={`h-10 w-12 rounded-md flex items-center justify-center ${selectedLink === "search" ? "bg-blue-100 text-blue-500 dark:text-gray-500" : "hover:bg-gray-100 hover:dark:bg-gray-700 hover:dark:text-white"}`}>
+            <Link to="search/movie" onClick={() => setSelectedLink("search")} className={`h-10 w-12 rounded-md flex items-center justify-center ${selectedLink === "search" ? "bg-blue-100 text-blue-500 dark:text-gray-500" : "hover:bg-gray-100 hover:dark:bg-gray-700 hover:dark:text-white"}`}>
               <svg viewBox="0 0 24 24" className="h-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="7" height="7"></rect>
                 <rect x="14" y="3" width="7" height="7"></rect>

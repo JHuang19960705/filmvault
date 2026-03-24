@@ -56,7 +56,7 @@ export default function Homepage({ currentUser, setCurrentUser }) {
                 <li onClick={() => { navigate("/back/yourReviews") }} className="cursor-pointer text-base text-white flex items-center pl-4" style={{ textShadow: "1px 1px 0px rgb(34 197 94)" }}>
                   Admin Dashboard
                 </li>
-                <li onClick={() => { navigate("/search/Movie") }} className="cursor-pointer text-base text-white flex items-center pl-4" style={{ textShadow: "1px 1px 0px rgb(34 197 94)" }}>
+                <li onClick={() => { navigate("/search/movie") }} className="cursor-pointer text-base text-white flex items-center pl-4" style={{ textShadow: "1px 1px 0px rgb(34 197 94)" }}>
                   Search Video
                 </li>
               </ul>

@@ -31,7 +31,7 @@ export default function SearchMovie({ currentUser }) {
 
   // 根據路由中的字來決定呼籲點擊的顯示與否
   const handleClick = () => {
-    if (location.pathname === "/search/Movie") {
+    if (location.pathname === "/search/movie") {
       setClickMovie(false); // 顯示呼籲點擊
     } else {
       setClickMovie(true); // 隱藏呼籲點擊

@@ -36,7 +36,7 @@ export default function SearchTV({ currentUser }) {
   
   // 根據路由中的字來決定呼籲點擊的顯示與否
   const handleClick = () => {
-    if (location.pathname === "/search/TV") {
+    if (location.pathname === "/search/tv") {
       setClickTV(false); // 顯示呼籲點擊
     } else {
       setClickTV(true); // 隱藏呼籲點擊
