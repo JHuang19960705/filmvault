@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Cast from "./Cast/Cast";
 import SearchCast from "./SearchCast/SearchCast";
 import ChangeCast from "./ChangeCast/ChangeCast";
+import { useUser } from "../../../../context/UserContext";
 
-export default function HandleCasts({ currentUser, setCurrentUser }) {
+export default function HandleCasts() {
+  const { currentUser, setCurrentUser } = useUser();
   const [castAll, setCastAll] = useState("");
   const [newCast, setNewCast] = useState("");
   const [oldCast, setOldCast] = useState("");
@@ -46,7 +48,7 @@ export default function HandleCasts({ currentUser, setCurrentUser }) {
         <SearchCast setNewCast={setNewCast} handleChangeOpen2={handleChangeOpen2} handleChangeClose2={handleChangeClose2} handleChangeClose1={handleChangeClose1} />
       }
       {isOpen2 &&
-        <ChangeCast key={oldCast} newCast={newCast} oldCast={oldCast} castAll={castAll} handleChangeClose1={handleChangeClose1} handleChangeClose2={handleChangeClose2} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <ChangeCast key={oldCast} newCast={newCast} oldCast={oldCast} castAll={castAll} handleChangeClose1={handleChangeClose1} handleChangeClose2={handleChangeClose2} />
       }
     </div>
   );

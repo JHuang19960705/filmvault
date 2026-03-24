@@ -3,8 +3,10 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import Loader from "../../components/Loader";
 import Overlay from "../../components/Overlay";
+import { useUser } from "../../context/UserContext";
 
-export default function FirstEnroll({ currentUser, setCurrentUser }) {
+export default function FirstEnroll() {
+  const { currentUser, setCurrentUser } = useUser();
   const [loading, setLoading] = useState(false); // 初始化加載狀態為 false
   const navigate = useNavigate();
 

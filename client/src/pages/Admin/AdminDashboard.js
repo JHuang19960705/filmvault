@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminService from "../../services/admin.service";
 import UserNav from "../../components/UserNav";
+import { useUser } from "../../context/UserContext";
 
 // ──────────────────────────────────────────────────────────
 //  角色顏色 badge
@@ -338,7 +339,8 @@ function SetupAdminModal({ onClose }) {
 // ══════════════════════════════════════════════════════════
 //  主 Dashboard
 // ══════════════════════════════════════════════════════════
-export default function AdminDashboard({ currentUser, setCurrentUser }) {
+export default function AdminDashboard() {
+  const { currentUser } = useUser();
   const navigate = useNavigate();
   const [tab, setTab] = useState("users"); // "users" | "content"
 
@@ -467,7 +469,7 @@ export default function AdminDashboard({ currentUser, setCurrentUser }) {
           >
             設定管理員
           </button>
-          <UserNav currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <UserNav />
         </div>
       </div>
 

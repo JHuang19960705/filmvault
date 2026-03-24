@@ -6,10 +6,12 @@ import axios from "axios";
 import CurrentSlide from "./CurrentSlide/CurrentSlide";
 import ChoosedImg from "./ChoosedImg/ChoosedImg";
 import Search from "../../../../components/Search";
+import { useUser } from "../../../../context/UserContext";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export default function HandleSlide({ currentUser, setCurrentUser }) {
+export default function HandleSlide() {
+  const { currentUser, setCurrentUser } = useUser();
   const navigate = useNavigate();
   const [newSlide, setNewSlide] = useState([]);
   const [data, setData] = useState(false);
@@ -101,7 +103,7 @@ export default function HandleSlide({ currentUser, setCurrentUser }) {
     <div className="px-8 pb-5">
       {/* 目前幻燈片 */}
       <div className="flex items-center justify-center p-2">
-        <CurrentSlide key={currentUser} currentUser={currentUser} />
+        <CurrentSlide key={currentUser} />
       </div>
       {/* 編輯區 */}
       <div className="mb-8">

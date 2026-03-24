@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/auth.service";
 import Theme from "./Theme/Theme";
 import ChangeTheme from "./ChangeTheme/ChangeTheme";
+import { useUser } from "../../../../context/UserContext";
 
-export default function HandleTheme({ currentUser, setCurrentUser }) {
+export default function HandleTheme() {
+  const { currentUser, setCurrentUser } = useUser();
   const navigate = useNavigate();
   const [theme, setTheme] = useState([]);
   const [newThemeId, setNewThemeId] = useState([]);
@@ -122,7 +124,7 @@ export default function HandleTheme({ currentUser, setCurrentUser }) {
       </section>
       {/* 如果主題選擇對話框為開啟狀態，則顯示主題選擇對話框 */}
       {isOpen &&
-        <ChangeTheme newThemeId={newThemeId} checkIfDouble={checkIfDouble} handleCloseChange={handleCloseChange} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <ChangeTheme newThemeId={newThemeId} checkIfDouble={checkIfDouble} handleCloseChange={handleCloseChange} />
       }
     </div>
   )

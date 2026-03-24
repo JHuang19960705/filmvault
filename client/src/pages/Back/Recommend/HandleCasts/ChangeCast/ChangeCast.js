@@ -1,7 +1,9 @@
-import React from "react"
+import React from "react";
 import AuthService from "../../../../../services/auth.service";
+import { useUser } from "../../../../../context/UserContext";
 
-export default function ChangeCast({newCast, oldCast, handleChangeClose2, castAll, currentUser, setCurrentUser, handleChangeClose1}) {
+export default function ChangeCast({newCast, oldCast, handleChangeClose2, castAll, handleChangeClose1}) {
+  const { currentUser, setCurrentUser } = useUser();
   const handleChangeCast = (oldCast, newCast) => {
     if (castAll.cast1 == oldCast){
       castAll.cast1 = newCast;

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import UserNav from "../../components/UserNav";
+import { useUser } from "../../context/UserContext";
 
-export default function Back({ currentUser, setCurrentUser }) {
+export default function Back() {
+  const { currentUser } = useUser();
   const [selectedLink, setSelectedLink] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -68,7 +70,7 @@ export default function Back({ currentUser, setCurrentUser }) {
           ))}
         </div>
         <div className="sticky z-50 top-0 flex border-b border-gray-200 bg-gray-100 px-4 md:px-10 dark:border-gray-800 dark:bg-gray-900">
-          <UserNav currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <UserNav />
         </div>
       </div>
       {/* 手機板上導覽 */}

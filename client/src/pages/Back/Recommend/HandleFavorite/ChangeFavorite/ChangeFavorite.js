@@ -1,7 +1,9 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import AuthService from "../../../../../services/auth.service";
+import { useUser } from "../../../../../context/UserContext";
 
-export default function ChangeFavorite({newFavorite, oldFavorite, handleChangeClose2, favorite, currentUser, setCurrentUser, handleChangeClose1}) {
+export default function ChangeFavorite({newFavorite, oldFavorite, handleChangeClose2, favorite, handleChangeClose1}) {
+  const { currentUser, setCurrentUser } = useUser();
   const [message, setMessage] = useState("");
   
   // 將選擇的角色修改為新的角色

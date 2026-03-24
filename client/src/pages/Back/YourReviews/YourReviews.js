@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import ContentService from "../../../services/content.service";
 import Loader from "../../../components/Loader";
+import { useUser } from "../../../context/UserContext";
 
-export default function YourReviews({ currentUser }) {
+export default function YourReviews() {
+  const { currentUser } = useUser();
   const [isLoading, setLoading] = useState(true);
   const [contentData, setContentData] = useState([]);
   const [clickContent, setClickContent] = useState(true);

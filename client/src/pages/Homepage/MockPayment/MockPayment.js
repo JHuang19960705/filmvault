@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
+import { useUser } from "../../../context/UserContext";
 
 const PLAN_INFO = {
   standard: { name: "Standard", price: "$4.99" },
@@ -19,7 +20,8 @@ function HintText({ text }) {
   return <p className="mt-1 text-xs text-blue-400 dark:text-blue-300">{text}</p>;
 }
 
-export default function MockPayment({ currentUser, setCurrentUser }) {
+export default function MockPayment() {
+  const { currentUser, setCurrentUser } = useUser();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const plan = searchParams.get("plan");

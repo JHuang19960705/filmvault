@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
+import { useUser } from "../../../context/UserContext";
 
-export default function PatchProfile({ currentUser, setCurrentUser }) {
+export default function PatchProfile() {
+  const { currentUser, setCurrentUser } = useUser();
   let [username, setUsername] = useState(""); // 用戶名狀態
   let [email, setEmail] = useState(""); // 電子信箱狀態
   let [message, setMessage] = useState(""); // 訊息狀態，用於顯示錯誤訊息

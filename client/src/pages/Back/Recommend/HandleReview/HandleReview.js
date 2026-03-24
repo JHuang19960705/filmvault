@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/auth.service";
 import Review from "./Review/Review";
 import ChangeReview from "./ChangeReview/ChangeReview";
-import ContentService from "../../../../services/content.service"
+import ContentService from "../../../../services/content.service";
+import { useUser } from "../../../../context/UserContext";
 
-export default function HandleReview({ currentUser, setCurrentUser }) {
+export default function HandleReview() {
+  const { currentUser, setCurrentUser } = useUser();
   const navigate = useNavigate();
   const [recommendReviews, setRecommendReviews] = useState([]);
   const [allReviews, setAllReviews] = useState([]);
@@ -119,7 +121,7 @@ export default function HandleReview({ currentUser, setCurrentUser }) {
       </section>
       {/* 變更影評視窗 */}
       {isOpen &&
-        <ChangeReview newReview={newReview} checkIfDouble={checkIfDouble} handleChangeClose={handleChangeClose} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <ChangeReview newReview={newReview} checkIfDouble={checkIfDouble} handleChangeClose={handleChangeClose} />
       }
     </div>
   );

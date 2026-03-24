@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Search from "../../../components/Search";
+import { useUser } from "../../../context/UserContext";
 
 const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export default function SearchTV({ currentUser }) {
+export default function SearchTV() {
+  const { currentUser } = useUser();
   const [input, setInput] = useState(""); // 儲存用戶輸入的搜尋關鍵字
   const [data, setData] = useState(null); // 儲存搜尋結果的影集資料
   const [page, setPage] = useState(1); // 儲存當前頁碼

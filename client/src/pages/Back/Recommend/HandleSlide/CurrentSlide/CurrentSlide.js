@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useUser } from "../../../../../context/UserContext";
 
 const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
 
-export default function CurrentSlide({ currentUser }) {
+export default function CurrentSlide() {
+  const { currentUser } = useUser();
   const [loading, setLoading] = useState(true);
   const slider = React.useRef(null);
   

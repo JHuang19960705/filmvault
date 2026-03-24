@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link, Outlet } from "react-router-dom";
 import ContentService from "../../../../services/content.service";
 import Loader from "../../../../components/Loader";
+import { useUser } from "../../../../context/UserContext";
 
 const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
 
-export default function PatchYourReview({ currentUser }) {
+export default function PatchYourReview() {
+  const { currentUser } = useUser();
   const navigate = useNavigate();
   const { reviewId } = useParams();
   const [reviewData, setReviewData] = useState({});

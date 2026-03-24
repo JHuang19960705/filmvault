@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileComponent from "./Profile/profile";
+import { useUser } from "../../context/UserContext";
 
-export default function Homepage({ currentUser, setCurrentUser }) {
+export default function Homepage() {
+  const { currentUser } = useUser();
   const [fillColor, setFillColor] = useState("white");
   const navigate = useNavigate();
 
@@ -65,7 +67,7 @@ export default function Homepage({ currentUser, setCurrentUser }) {
           {/* 用戶資訊 */}
           <div>
             {currentUser && (
-              <ProfileComponent currentUser={currentUser} setCurrentUser={setCurrentUser} />
+              <ProfileComponent />
             )}
           </div>
         </div>

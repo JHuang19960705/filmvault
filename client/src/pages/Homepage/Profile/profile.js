@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
+import { useUser } from "../../../context/UserContext";
 
-export default function Profile({ currentUser, setCurrentUser }) {
+export default function Profile() {
+  const { currentUser, setCurrentUser } = useUser();
   const [isOpen, setIsOpen] = useState(false); // 控制下拉選單的開關狀態
   const navigate = useNavigate();
 

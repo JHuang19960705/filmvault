@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ContentService from "../../../services/content.service";
 import Loader from "../../../components/Loader";
+import { useUser } from "../../../context/UserContext";
 
 const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
 
-export default function ReviewsContent({ currentUser }) {
+export default function ReviewsContent() {
+  const { currentUser } = useUser();
   const { TMDBId } = useParams(); // 從URL中獲取TMDBId
   const [contentData, setContentData] = useState([]); // 影評資料
   const [isLoading, setLoading] = useState(true); // 加載狀態

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Favorite from "./Favorite/Favorite";
 import SearchFavorite from "./SearchFavorite/SearchFavorite";
 import ChangeFavorite from "./ChangeFavorite/ChangeFavorite";
+import { useUser } from "../../../../context/UserContext";
 
-export default function HandleFavorite({ currentUser, setCurrentUser }) {
+export default function HandleFavorite() {
+  const { currentUser, setCurrentUser } = useUser();
   const [favorite, setFavorite] = useState(null);
   const [newFavorite, setNewFavorite] = useState("");
   const [oldFavorite, setOldFavorite] = useState("")
@@ -45,7 +47,7 @@ export default function HandleFavorite({ currentUser, setCurrentUser }) {
         <SearchFavorite setNewFavorite={setNewFavorite} handleChangeOpen2={handleChangeOpen2} handleChangeClose2={handleChangeClose2} handleChangeClose1={handleChangeClose1} />
       }
       {isOpen2 &&
-        <ChangeFavorite newFavorite={newFavorite} oldFavorite={oldFavorite} favorite={favorite} handleChangeClose1={handleChangeClose1} handleChangeClose2={handleChangeClose2} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <ChangeFavorite newFavorite={newFavorite} oldFavorite={oldFavorite} favorite={favorite} handleChangeClose1={handleChangeClose1} handleChangeClose2={handleChangeClose2} />
       }
     </div>
   );

@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
+import { useUser } from "../../../context/UserContext";
 
-export default function PatchRole({ currentUser, setCurrentUser }) {
+export default function PatchRole() {
+  const { currentUser, setCurrentUser } = useUser();
   const navigate = useNavigate(); // 使用useNavigate()鉤子來獲取導航功能
 
   // 只處理降級回 free，升級需透過付款流程

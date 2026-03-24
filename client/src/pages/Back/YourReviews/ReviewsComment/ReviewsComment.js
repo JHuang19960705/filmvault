@@ -3,8 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import ContentService from "../../../../services/content.service";
 import Loader from "../../../../components/Loader";
 import Overlay from "../../../../components/Overlay";
+import { useUser } from "../../../../context/UserContext";
 
-export default function YourReviewsComment({ currentUser }) {
+export default function YourReviewsComment() {
+  const { currentUser } = useUser();
   const [reviewData, setReviewData] = useState(null);
   const [newComment, setNewComment] = useState("");
   const [isLoading, setLoading] = useState(true);

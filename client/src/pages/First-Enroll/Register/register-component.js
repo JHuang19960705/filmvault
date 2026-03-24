@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
+import { useUser } from "../../../context/UserContext";
 
-export default function RegisterComponent({ currentUser }) {
+export default function RegisterComponent() {
+  const { currentUser, setCurrentUser } = useUser();
   const { clickRole } = useParams(); // 獲取URL參數
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

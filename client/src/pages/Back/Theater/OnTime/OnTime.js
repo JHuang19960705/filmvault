@@ -6,10 +6,12 @@ import CurrentTheater from "./CurrentTheater/CurrentTheater";
 import ChoosedImg from "../Component/ChooseImg";
 import Search from "../../../../components/Search";
 import SlideAfterSearch from "../Component/SlideAfterSearch";
+import { useUser } from "../../../../context/UserContext";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export default function OnTime({ currentUser, setCurrentUser }) {
+export default function OnTime() {
+  const { currentUser, setCurrentUser } = useUser();
   const navigate = useNavigate();
   const [message, setMessage] = useState([]);
   const [newOnTime, setNewOnTime] = useState([]);
@@ -84,7 +86,7 @@ export default function OnTime({ currentUser, setCurrentUser }) {
     <div className="px-8 pb-5">
       {/* 目前幻燈片 */}
       <div className="flex items-center justify-center p-2">
-        <CurrentTheater key={currentUser} currentUser={currentUser} />
+        <CurrentTheater key={currentUser} />
       </div>
       {/* 編輯區 */}
       <div className="mb-8">

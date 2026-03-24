@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
 import Loader from "../../../components/Loader";
 import Overlay from "../../../components/Overlay";
+import { useUser } from "../../../context/UserContext";
 
-export default function LoginComponent({ currentUser, setCurrentUser }) {
+export default function LoginComponent() {
+  const { currentUser, setCurrentUser } = useUser();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false); // 初始化加載狀態為 false
   const [email, setEmail] = useState("");

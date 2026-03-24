@@ -3,8 +3,10 @@ import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import UserNav from "../../components/UserNav";
 import Loader from "../../components/Loader";
+import { useUser } from "../../context/UserContext";
 
-export default function AllUser({ currentUser, setCurrentUser }) {
+export default function AllUser() {
+  const { currentUser } = useUser();
   const [allUser, setAllUser] = useState(null); // 定義所有用戶資料的狀態
   const [clickUser, setClickUser] = useState(true);
   const [clickTitle, setClickTitle] = useState(null);
@@ -83,7 +85,7 @@ export default function AllUser({ currentUser, setCurrentUser }) {
         </div>
         {/* <!--  自己   --> */}
         <div className="sticky z-50 top-0 flex border-b border-gray-200 bg-gray-100 px-4 md:px-10 dark:border-gray-800 dark:bg-gray-900">
-          <UserNav currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <UserNav />
         </div>
       </div>
       {/* 手機板上導覽 */}

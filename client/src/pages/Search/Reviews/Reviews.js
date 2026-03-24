@@ -1,11 +1,10 @@
 import React from "react";
 import ReviewsContent from "./ReviewsContent";
 
-export default function Reviews({ currentUser }) {
+export default function Reviews() {
   return (
     <div className="blog-wrap">
-      {/* 將currentUser傳遞給ReviewsContent組件 */}
-      <ReviewsContent currentUser={currentUser} />
+      <ReviewsContent />
     </div>
   )
 }

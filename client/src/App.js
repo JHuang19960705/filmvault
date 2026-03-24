@@ -1,6 +1,6 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import AuthService from "./services/auth.service";
+import { UserProvider, useUser } from "./context/UserContext";
 import Loader from "./components/Loader";
 
 // 懶載入所有頁面元件（Code Splitting）
@@ -44,75 +44,73 @@ const Page404 = lazy(() => import("./components/Page404"));
 const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"));
 
 // 集中授權守衛：未登入直接導回首頁
-function ProtectedRoute({ currentUser, children }) {
+function ProtectedRoute({ children }) {
+  const { currentUser } = useUser();
   if (!currentUser) return <Navigate to="/firstEnroll" replace />;
   return children;
 }
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
-
-  // 避免每個 Route 重複寫兩次 prop
-  const userProps = { currentUser, setCurrentUser };
-
   return (
-    <Router>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="firstEnroll" element={<FirstEnroll {...userProps} />}>
-            <Route path="register/:clickRole" element={<RegisterComponent {...userProps} />} />
-            <Route path="login" element={<LoginComponent {...userProps} />} />
-          </Route>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<ProtectedRoute currentUser={currentUser}><Homepage {...userProps} /></ProtectedRoute>} />
-            <Route path="profile/patchProfile" element={<ProtectedRoute currentUser={currentUser}><PatchProfile {...userProps} /></ProtectedRoute>} />
-            <Route path="profile/patchRole" element={<ProtectedRoute currentUser={currentUser}><PatchRole {...userProps} /></ProtectedRoute>} />
-            <Route path="profile/mockPayment" element={<ProtectedRoute currentUser={currentUser}><MockPayment {...userProps} /></ProtectedRoute>} />
-            <Route path="allUser" element={<ProtectedRoute currentUser={currentUser}><AllUser {...userProps} /></ProtectedRoute>}>
-              <Route path=":userId" element={<ThisUser {...userProps} />}>
-                <Route path="userReviews" element={<UserReviews {...userProps} />}>
-                  <Route path=":reviewId" element={<UserReviewsComment {...userProps} />} />
-                </Route>
-                <Route path="userRecommend" element={<UserRecommend {...userProps} />} />
-                <Route path="userTheater" element={<UserTheater {...userProps} />} />
-              </Route>
+    <UserProvider>
+      <Router>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="firstEnroll" element={<FirstEnroll />}>
+              <Route path="register/:clickRole" element={<RegisterComponent />} />
+              <Route path="login" element={<LoginComponent />} />
             </Route>
-            <Route path="back" element={<ProtectedRoute currentUser={currentUser}><Back {...userProps} /></ProtectedRoute>}>
-              <Route path="yourReviews" element={<YourReviews {...userProps} />}>
-                <Route path=":reviewId" element={<PatchYourReview {...userProps} />}>
-                  <Route path="reviewsComment" element={<ReviewsComment {...userProps} />} />
+            <Route path="/" element={<Layout />}>
+              <Route index element={<ProtectedRoute><Homepage /></ProtectedRoute>} />
+              <Route path="profile/patchProfile" element={<ProtectedRoute><PatchProfile /></ProtectedRoute>} />
+              <Route path="profile/patchRole" element={<ProtectedRoute><PatchRole /></ProtectedRoute>} />
+              <Route path="profile/mockPayment" element={<ProtectedRoute><MockPayment /></ProtectedRoute>} />
+              <Route path="allUser" element={<ProtectedRoute><AllUser /></ProtectedRoute>}>
+                <Route path=":userId" element={<ThisUser />}>
+                  <Route path="userReviews" element={<UserReviews />}>
+                    <Route path=":reviewId" element={<UserReviewsComment />} />
+                  </Route>
+                  <Route path="userRecommend" element={<UserRecommend />} />
+                  <Route path="userTheater" element={<UserTheater />} />
                 </Route>
               </Route>
-              <Route path="yourRecommend" element={<Recommend {...userProps} />}>
-                <Route path="handleSlide" element={<HandleSlide {...userProps} />} />
-                <Route path="handleCasts" element={<HandleCasts {...userProps} />} />
-                <Route path="handleReview" element={<HandleReview {...userProps} />} />
-                <Route path="handleTheme" element={<HandleTheme {...userProps} />} />
-                <Route path="handleFavorite" element={<HandleFavorite {...userProps} />} />
+              <Route path="back" element={<ProtectedRoute><Back /></ProtectedRoute>}>
+                <Route path="yourReviews" element={<YourReviews />}>
+                  <Route path=":reviewId" element={<PatchYourReview />}>
+                    <Route path="reviewsComment" element={<ReviewsComment />} />
+                  </Route>
+                </Route>
+                <Route path="yourRecommend" element={<Recommend />}>
+                  <Route path="handleSlide" element={<HandleSlide />} />
+                  <Route path="handleCasts" element={<HandleCasts />} />
+                  <Route path="handleReview" element={<HandleReview />} />
+                  <Route path="handleTheme" element={<HandleTheme />} />
+                  <Route path="handleFavorite" element={<HandleFavorite />} />
+                </Route>
+                <Route path="yourTheater" element={<HandleTheater />}>
+                  <Route path="onTime" element={<OnTime />} />
+                  <Route path="comingSoon" element={<ComingSoon />} />
+                  <Route path="leavingSoon" element={<LeavingSoon />} />
+                </Route>
               </Route>
-              <Route path="yourTheater" element={<HandleTheater {...userProps} />}>
-                <Route path="onTime" element={<OnTime {...userProps} />} />
-                <Route path="comingSoon" element={<ComingSoon {...userProps} />} />
-                <Route path="leavingSoon" element={<LeavingSoon {...userProps} />} />
+              <Route path="search" element={<Search />}>
+                <Route path="tv" element={<SearchTV />}>
+                  <Route path=":TMDBId" element={<TVDetail />} />
+                  <Route path="postTVContent/:TMDBId" element={<PostTVContent />} />
+                  <Route path="reviews/:TMDBId" element={<Reviews />} />
+                </Route>
+                <Route path="movie" element={<SearchMovie />}>
+                  <Route path=":TMDBId" element={<MovieDetail />} />
+                  <Route path="postMovieContent/:TMDBId" element={<PostMovieContent />} />
+                  <Route path="reviews/:TMDBId" element={<Reviews />} />
+                </Route>
               </Route>
+              <Route path="admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+              <Route path="*" element={<Page404 />} />
             </Route>
-            <Route path="search" element={<Search {...userProps} />}>
-              <Route path="tv" element={<SearchTV {...userProps} />}>
-                <Route path=":TMDBId" element={<TVDetail {...userProps} />} />
-                <Route path="postTVContent/:TMDBId" element={<PostTVContent {...userProps} />} />
-                <Route path="reviews/:TMDBId" element={<Reviews {...userProps} />} />
-              </Route>
-              <Route path="movie" element={<SearchMovie {...userProps} />}>
-                <Route path=":TMDBId" element={<MovieDetail {...userProps} />} />
-                <Route path="postMovieContent/:TMDBId" element={<PostMovieContent {...userProps} />} />
-                <Route path="reviews/:TMDBId" element={<Reviews {...userProps} />} />
-              </Route>
-            </Route>
-            <Route path="admin" element={<ProtectedRoute currentUser={currentUser}><AdminDashboard {...userProps} /></ProtectedRoute>} />
-            <Route path="*" element={<Page404 />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </Router>
+          </Routes>
+        </Suspense>
+      </Router>
+    </UserProvider>
   );
 }
