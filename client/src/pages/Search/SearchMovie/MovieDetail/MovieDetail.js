@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Information from "../../Video/Information";  
-import Charater from "../../Video/Charater";  
+import Character from "../../Video/Character";
 import Loader from "../../../../components/Loader";
 
 const API_KEY = process.env.REACT_APP_API_KEY;  
@@ -35,7 +35,7 @@ export default function MovieDetail() {
       {/* 顯示影片資訊 */}
       {movieAll && <Information videoAll={movieAll} />}
       {/* 如果角色數量大於4，顯示角色元件 */}
-      {casts && casts.length > 4 && <Charater casts={casts}/>}
+      {casts && casts.length > 4 && <Character casts={casts}/>}
     </div>
   )
 }
