@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/auth.service";
-import Theme from "./theme/Theme";
-import ChangeTheme from "./change-theme/ChangeTheme";
+import Theme from "./Theme";
+import ChangeTheme from "./ChangeTheme";
 import { useUser } from "../../../../context/UserContext";
 
 export default function HandleTheme() {

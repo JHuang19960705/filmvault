@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Slide from "./slide/Slide";
-import Character from "./character/Character";
-import Reviews from "./reviews/Reviews";
-import BestChoose from "./best-choose/BestChoose";
-import Theme from "./theme/Theme";
+import Slide from "./Slide";
+import Character from "./Character";
+import Reviews from "./Reviews";
+import BestChoose from "./BestChoose";
+import Theme from "./Theme";
 import AuthService from "../../../../services/auth.service";
 import Loader from "../../../../components/Loader";
 

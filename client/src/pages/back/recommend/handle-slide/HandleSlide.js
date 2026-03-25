@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/auth.service";
 import SlideAfterSearch from "./SlideAfterSearch";
 import axios from "axios";
-import CurrentSlide from "./current-slide/CurrentSlide";
-import ChoosedImg from "./choosed-img/ChoosedImg";
+import CurrentSlide from "./CurrentSlide";
+import ChoosedImg from "./ChoosedImg";
 import Search from "../../../../components/Search";
 import { useUser } from "../../../../context/UserContext";
 

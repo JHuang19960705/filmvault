@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/auth.service";
-import Review from "./review/Review";
-import ChangeReview from "./change-review/ChangeReview";
+import Review from "./Review";
+import ChangeReview from "./ChangeReview";
 import ContentService from "../../../../services/content.service";
 import { useUser } from "../../../../context/UserContext";
 

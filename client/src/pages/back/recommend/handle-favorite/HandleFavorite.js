@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Favorite from "./favorite/Favorite";
-import SearchFavorite from "./search-favorite/SearchFavorite";
-import ChangeFavorite from "./change-favorite/ChangeFavorite";
+import Favorite from "./Favorite";
+import SearchFavorite from "./SearchFavorite";
+import ChangeFavorite from "./ChangeFavorite";
 import { useUser } from "../../../../context/UserContext";
 
 export default function HandleFavorite() {

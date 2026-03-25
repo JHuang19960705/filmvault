@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Cast from "./cast/Cast";
-import SearchCast from "./search-cast/SearchCast";
-import ChangeCast from "./change-cast/ChangeCast";
+import Cast from "./Cast";
+import SearchCast from "./SearchCast";
+import ChangeCast from "./ChangeCast";
 import { useUser } from "../../../../context/UserContext";
 
 export default function HandleCasts() {

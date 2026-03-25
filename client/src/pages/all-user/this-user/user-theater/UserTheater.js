@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Navigation from "./component/Navigation"
-import TheaterItems from "./component/TheaterItems";
+import Navigation from "./Navigation"
+import TheaterItems from "./TheaterItems";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AuthService from "../../../../services/auth.service";
 

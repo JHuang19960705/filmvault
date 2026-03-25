@@ -3,12 +3,12 @@ import Layout from "../components/Layout";
 
 // 懶載入所有頁面元件（Code Splitting）
 const FirstEnroll       = lazy(() => import(/* webpackChunkName: "first-enroll" */         "../pages/first-enroll/FirstEnroll"));
-const Register          = lazy(() => import(/* webpackChunkName: "register" */             "../pages/first-enroll/register/Register"));
-const Login             = lazy(() => import(/* webpackChunkName: "login" */                "../pages/first-enroll/login/Login"));
+const Register          = lazy(() => import(/* webpackChunkName: "register" */             "../pages/first-enroll/Register"));
+const Login             = lazy(() => import(/* webpackChunkName: "login" */                "../pages/first-enroll/Login"));
 const Homepage          = lazy(() => import(/* webpackChunkName: "homepage" */             "../pages/homepage/Homepage"));
-const PatchProfile      = lazy(() => import(/* webpackChunkName: "patch-profile" */        "../pages/homepage/patch-profile/PatchProfile"));
-const PatchRole         = lazy(() => import(/* webpackChunkName: "patch-role" */           "../pages/homepage/patch-role/PatchRole"));
-const MockPayment       = lazy(() => import(/* webpackChunkName: "mock-payment" */         "../pages/homepage/mock-payment/MockPayment"));
+const PatchProfile      = lazy(() => import(/* webpackChunkName: "patch-profile" */        "../pages/homepage/PatchProfile"));
+const PatchRole         = lazy(() => import(/* webpackChunkName: "patch-role" */           "../pages/homepage/PatchRole"));
+const MockPayment       = lazy(() => import(/* webpackChunkName: "mock-payment" */         "../pages/homepage/MockPayment"));
 const AllUser           = lazy(() => import(/* webpackChunkName: "all-user" */             "../pages/all-user/AllUser"));
 const ThisUser          = lazy(() => import(/* webpackChunkName: "this-user" */            "../pages/all-user/this-user/ThisUser"));
 const UserReviews       = lazy(() => import(/* webpackChunkName: "user-reviews" */         "../pages/all-user/this-user/user-reviews/UserReviews"));
@@ -17,8 +17,8 @@ const UserRecommend     = lazy(() => import(/* webpackChunkName: "user-recommend
 const UserTheater       = lazy(() => import(/* webpackChunkName: "user-theater" */         "../pages/all-user/this-user/user-theater/UserTheater"));
 const Back              = lazy(() => import(/* webpackChunkName: "back" */                 "../pages/back/Back"));
 const YourReviews       = lazy(() => import(/* webpackChunkName: "your-reviews" */         "../pages/back/your-reviews/YourReviews"));
-const ReviewsComment    = lazy(() => import(/* webpackChunkName: "reviews-comment" */      "../pages/back/your-reviews/reviews-comment/ReviewsComment"));
-const PatchYourReview   = lazy(() => import(/* webpackChunkName: "patch-your-review" */    "../pages/back/your-reviews/patch-your-review/PatchYourReview"));
+const ReviewsComment    = lazy(() => import(/* webpackChunkName: "reviews-comment" */      "../pages/back/your-reviews/ReviewsComment"));
+const PatchYourReview   = lazy(() => import(/* webpackChunkName: "patch-your-review" */    "../pages/back/your-reviews/PatchYourReview"));
 const Recommend         = lazy(() => import(/* webpackChunkName: "recommend" */            "../pages/back/recommend/Recommend"));
 const HandleSlide       = lazy(() => import(/* webpackChunkName: "handle-slide" */         "../pages/back/recommend/handle-slide/HandleSlide"));
 const HandleCasts       = lazy(() => import(/* webpackChunkName: "handle-casts" */         "../pages/back/recommend/handle-casts/HandleCasts"));
@@ -31,11 +31,11 @@ const OnTime            = lazy(() => import(/* webpackChunkName: "on-time" */   
 const LeavingSoon       = lazy(() => import(/* webpackChunkName: "leaving-soon" */         "../pages/back/theater/leaving-soon/LeavingSoon"));
 const Search            = lazy(() => import(/* webpackChunkName: "search" */               "../pages/search/Search"));
 const SearchTV          = lazy(() => import(/* webpackChunkName: "search-tv" */            "../pages/search/search-tv/SearchTV"));
-const TVDetail          = lazy(() => import(/* webpackChunkName: "tv-detail" */            "../pages/search/search-tv/tv-detail/TVDetail"));
-const PostTVContent     = lazy(() => import(/* webpackChunkName: "post-tv-content" */      "../pages/search/search-tv/post-tv-content/PostTVContent"));
+const TVDetail          = lazy(() => import(/* webpackChunkName: "tv-detail" */            "../pages/search/search-tv/TVDetail"));
+const PostTVContent     = lazy(() => import(/* webpackChunkName: "post-tv-content" */      "../pages/search/search-tv/PostTVContent"));
 const SearchMovie       = lazy(() => import(/* webpackChunkName: "search-movie" */         "../pages/search/search-movie/SearchMovie"));
-const MovieDetail       = lazy(() => import(/* webpackChunkName: "movie-detail" */         "../pages/search/search-movie/movie-detail/MovieDetail"));
-const PostMovieContent  = lazy(() => import(/* webpackChunkName: "post-movie-content" */   "../pages/search/search-movie/post-movie-content/PostMovieContent"));
+const MovieDetail       = lazy(() => import(/* webpackChunkName: "movie-detail" */         "../pages/search/search-movie/MovieDetail"));
+const PostMovieContent  = lazy(() => import(/* webpackChunkName: "post-movie-content" */   "../pages/search/search-movie/PostMovieContent"));
 const Reviews           = lazy(() => import(/* webpackChunkName: "reviews" */              "../pages/search/reviews/Reviews"));
 const Page404           = lazy(() => import(/* webpackChunkName: "page-404" */             "../components/Page404"));
 const AdminDashboard    = lazy(() => import(/* webpackChunkName: "admin-dashboard" */      "../pages/admin/AdminDashboard"));

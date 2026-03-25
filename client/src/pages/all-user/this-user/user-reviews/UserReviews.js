@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Outlet, useParams } from "react-router-dom";
-import UserAllReview from "./user-all-review/UserAllReview";
+import UserAllReview from "./UserAllReview";
 import ContentService from "../../../../services/content.service";
 import Loader from "../../../../components/Loader";
 

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/auth.service";
 import axios from "axios";
-import CurrentTheater from "./current-theater/CurrentTheater";
-import ChoosedImg from "../component/ChooseImg";
+import CurrentTheater from "./CurrentTheater";
+import ChoosedImg from "../ChooseImg";
 import Search from "../../../../components/Search";
-import SlideAfterSearch from "../component/SlideAfterSearch";
+import SlideAfterSearch from "../SlideAfterSearch";
 import { useUser } from "../../../../context/UserContext";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
