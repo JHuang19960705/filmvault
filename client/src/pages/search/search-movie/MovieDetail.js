@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Information from "../video/Information";
-import Character from "../video/Character";
+import Information from "../Video/Information";
+import Character from "../Video/Character";
 import Loader from "../../../components/Loader";
 
 const API_KEY = process.env.REACT_APP_API_KEY;  
