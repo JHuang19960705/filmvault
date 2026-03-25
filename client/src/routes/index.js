@@ -3,8 +3,8 @@ import Layout from "../components/Layout";
 
 // 懶載入所有頁面元件（Code Splitting）
 const FirstEnroll       = lazy(() => import(/* webpackChunkName: "first-enroll" */         "../pages/first-enroll/FirstEnroll"));
-const RegisterComponent = lazy(() => import(/* webpackChunkName: "register" */             "../pages/first-enroll/register/RegisterComponent"));
-const LoginComponent    = lazy(() => import(/* webpackChunkName: "login" */                "../pages/first-enroll/login/LoginComponent"));
+const Register          = lazy(() => import(/* webpackChunkName: "register" */             "../pages/first-enroll/register/Register"));
+const Login             = lazy(() => import(/* webpackChunkName: "login" */                "../pages/first-enroll/login/Login"));
 const Homepage          = lazy(() => import(/* webpackChunkName: "homepage" */             "../pages/homepage/Homepage"));
 const PatchProfile      = lazy(() => import(/* webpackChunkName: "patch-profile" */        "../pages/homepage/patch-profile/PatchProfile"));
 const PatchRole         = lazy(() => import(/* webpackChunkName: "patch-role" */           "../pages/homepage/patch-role/PatchRole"));
@@ -56,8 +56,8 @@ const routeConfig = [
     path: "/first-enroll",
     Component: FirstEnroll,
     children: [
-      { path: "register/:clickRole", Component: RegisterComponent },
-      { path: "login",               Component: LoginComponent },
+      { path: "register/:clickRole", Component: Register },
+      { path: "login",               Component: Login },
     ],
   },
   {

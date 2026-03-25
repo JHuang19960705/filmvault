@@ -5,7 +5,7 @@ import Loader from "../../../components/Loader";
 import Overlay from "../../../components/Overlay";
 import { useUser } from "../../../context/UserContext";
 
-export default function LoginComponent() {
+export default function Login() {
   const { currentUser, setCurrentUser } = useUser();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false); // 初始化加載狀態為 false

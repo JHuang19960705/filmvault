@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
 import { useUser } from "../../../context/UserContext";
 
-export default function RegisterComponent() {
+export default function Register() {
   const { currentUser, setCurrentUser } = useUser();
   const { clickRole } = useParams(); // 獲取URL參數
   const [username, setUsername] = useState("");
