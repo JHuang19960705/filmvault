@@ -27,10 +27,17 @@ export default function PatchYourReview() {
       if (currentUser.user.role === "standard" || currentUser.user.role === "premium") {
         ContentService.getReviewByReviewId(reviewId)
           .then((data) => {
-            setReviewData(data.data[0]);
-            setTitle(data.data[0].title);
-            setReview(data.data[0].content);
-            setTags(data.data[0].tags);
+            const reviewResult = data.data[0];
+            // 確認當前用戶是此影評的作者
+            if (!reviewResult || reviewResult.writer._id !== currentUser.user._id) {
+              window.alert("你不是該篇文章的主人。您現在將被重新導向到首頁。");
+              navigate("/");
+              return;
+            }
+            setReviewData(reviewResult);
+            setTitle(reviewResult.title);
+            setReview(reviewResult.content);
+            setTags(reviewResult.tags);
             setLoading(false);
           })
           .catch((e) => {
