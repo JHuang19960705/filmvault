@@ -1,5 +1,5 @@
 import React from "react";
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_MD } from "../../../../utils/tmdb";
 
 export default function Review({ review, setNewReview, handleChangeOpen }) {
   const handleSelectReview = () => {
@@ -26,7 +26,7 @@ export default function Review({ review, setNewReview, handleChangeOpen }) {
               <div>
                 {/* 顯示電影圖片 */}
                 <a>
-                  <img className="archive_kv" src={tmdbBaseURL + review.TMDBImg} />
+                  <img className="archive_kv" src={TMDB_IMG_MD + review.TMDBImg} loading="lazy" decoding="async" />
                 </a>
               </div>
               {/* 顯示評論標題 */}

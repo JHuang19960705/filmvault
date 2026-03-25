@@ -1,13 +1,13 @@
 import React from "react";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_MD } from "../../../../utils/tmdb";
 
 export default function TheaterItems({ poster }) {
   return (
     <div className="item">
       <div>
         <button className="item_image">
-          <img src={tmdbBaseURL + poster} />
+          <img src={TMDB_IMG_MD + poster} loading="lazy" decoding="async" />
         </button>
       </div>
       <div className="product-rent">

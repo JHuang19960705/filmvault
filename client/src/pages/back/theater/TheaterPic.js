@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_LG } from "../../../utils/tmdb";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -25,7 +25,7 @@ export default function TheaterPic({ TMDBId }) {
   
   return (
     <button className="slide js-slide">
-      <img src={tmdbBaseURL + videoAll.backdrop_path} />
+      <img src={TMDB_IMG_LG + videoAll.backdrop_path} loading="lazy" decoding="async" />
     </button>
   );
 }

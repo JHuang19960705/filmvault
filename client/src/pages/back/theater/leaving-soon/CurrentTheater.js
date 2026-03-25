@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { useUser } from "../../../../context/UserContext";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_LG } from "../../../../utils/tmdb";
 
 export default function CurrentTheater() {
   const { currentUser } = useUser();
@@ -54,7 +54,7 @@ export default function CurrentTheater() {
     backdropElements = currentUser.user.theater.leaving.tmdbImgBackdrop.map((backdrop, index) => {
       return (
         <div key={index}>
-          <img src={tmdbBaseURL + backdrop} style={{ width: "100%", margin: "auto" }} />
+          <img src={TMDB_IMG_LG + backdrop} style={{ width: "100%", margin: "auto" }} loading="lazy" decoding="async" />
         </div>
       );
     });

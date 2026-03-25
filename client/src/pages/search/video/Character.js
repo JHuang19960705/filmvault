@@ -1,6 +1,6 @@
 import React from 'react';
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_SM } from "../../../utils/tmdb";
 
 // 角色組件
 export default function Character({ casts }) {
@@ -11,11 +11,11 @@ export default function Character({ casts }) {
                 <div className="movie-character-left">
                     <div className="movie-character-list1">
                         {/* 第一個角色 */}
-                        <img className="movie-first-img" src={casts[0]?.profile_path && (tmdbBaseURL + casts[0].profile_path)} alt="" data-cast={casts[0]?.id} />
+                        <img className="movie-first-img" src={casts[0]?.profile_path && (TMDB_IMG_SM + casts[0].profile_path)} alt="" data-cast={casts[0]?.id} loading="lazy" decoding="async" />
                         <div className="movie-character-list2">
                             {/* 其他角色 */}
                             {casts.slice(1, 4).map(cast => (
-                                <img key={cast.id} src={cast.profile_path && (tmdbBaseURL + cast.profile_path)} alt="" data-cast={cast.id} />
+                                <img key={cast.id} src={cast.profile_path && (TMDB_IMG_SM + cast.profile_path)} alt="" data-cast={cast.id} loading="lazy" decoding="async" />
                             ))}
                         </div>
                     </div>

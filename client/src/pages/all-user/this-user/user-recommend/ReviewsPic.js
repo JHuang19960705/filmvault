@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ContentService from "../../../../services/content.service";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_MD } from "../../../../utils/tmdb";
 
 export default function ReviewsPic({ reviewId }) {
   const [reviewData, setReviewData] = useState(null);
@@ -25,7 +25,7 @@ export default function ReviewsPic({ reviewId }) {
       {reviewData && reviewData.title && reviewData.content &&
         <>
           <button>
-            <img src={tmdbBaseURL + reviewData.TMDBImg} alt="" className="js-review-click" datareviewid="${reviews[i].id}" />
+            <img src={TMDB_IMG_MD + reviewData.TMDBImg} alt="" className="js-review-click" datareviewid="${reviews[i].id}" loading="lazy" decoding="async" />
           </button>
           <button className="media-studies-article-title js-review-click" datareviewid="${reviews[i].id}">
             <p>影評｜{reviewData.title}</p>

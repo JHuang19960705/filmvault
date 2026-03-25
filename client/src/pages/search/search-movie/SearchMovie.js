@@ -5,7 +5,7 @@ import Search from "../../../components/Search";
 import Loader from "../../../components/Loader";
 import { useUser } from "../../../context/UserContext";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_SM } from "../../../utils/tmdb";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function SearchMovie() {
@@ -98,7 +98,7 @@ export default function SearchMovie() {
                   <div className="w-full">
                     <p className="truncate pb-2">{d.title}</p>
                     <Link to={`${d.id}`} onClick={() => { handleClickTitle(d.title) }}>
-                      <img src={tmdbBaseURL + d.poster_path} alt={d.title} />
+                      <img src={TMDB_IMG_SM + d.poster_path} alt={d.title} loading="lazy" decoding="async" />
                     </Link>
                   </div>
                   {currentUser && currentUser.user.role !== "free" && (

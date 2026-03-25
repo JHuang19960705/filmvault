@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_SM } from "../../../../utils/tmdb";
 
 export default function Theme({ genre, setNewThemeId, handleOpenChange }) {
   const [isLoading, setLoading] = useState(true);
@@ -44,13 +44,13 @@ export default function Theme({ genre, setNewThemeId, handleOpenChange }) {
             <div className="archive_col1">
               <div>
                 {/* 顯示第一部影片的海報 */}
-                <a><img className="archive_kv" src={tmdbBaseURL + video[0].poster_path} /></a>
+                <a><img className="archive_kv" src={TMDB_IMG_SM + video[0].poster_path} loading="lazy" decoding="async" /></a>
               </div>
             </div>
               <div className="archive_col2">
                 {/* 顯示第二部至第五部影片的海報 */}
                 {video.slice(1, 5).map((v) => {
-                  return <img src={tmdbBaseURL + v.poster_path} />
+                  return <img src={TMDB_IMG_SM + v.poster_path} loading="lazy" decoding="async" />
                 })}
               </div>
           </div>

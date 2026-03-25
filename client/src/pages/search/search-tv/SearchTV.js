@@ -4,7 +4,7 @@ import axios from "axios";
 import Search from "../../../components/Search";
 import { useUser } from "../../../context/UserContext";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_SM } from "../../../utils/tmdb";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function SearchTV() {
@@ -97,7 +97,7 @@ export default function SearchTV() {
                       <div className="w-full">
                         <p className="truncate pb-2">{d.original_name}</p>
                         <Link to={`${d.id}`} onClick={() => { handleClickTitle(d.original_name) }}>
-                          <img src={tmdbBaseURL + d.poster_path} />
+                          <img src={TMDB_IMG_SM + d.poster_path} loading="lazy" decoding="async" />
                         </Link>
                       </div>
                       {currentUser && currentUser.user.role !== "free" && (

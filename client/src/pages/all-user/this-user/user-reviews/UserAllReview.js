@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_MD } from "../../../../utils/tmdb";
 
 export default function UserAllReview({ review }) {
   return (
@@ -16,7 +16,7 @@ export default function UserAllReview({ review }) {
           <div className="archive_content">
             <div className="archive_content_wrap">
               <div>
-                <a href="#"><img className="archive_kv" src={tmdbBaseURL + review.TMDBImg} alt={review.title} /></a>
+                <a href="#"><img className="archive_kv" src={TMDB_IMG_MD + review.TMDBImg} alt={review.title} loading="lazy" decoding="async" /></a>
               </div>
               <h3 className="archive_title">
                 <div>{review.title}</div>

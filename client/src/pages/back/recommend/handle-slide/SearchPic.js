@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_SM } from "../../../../utils/tmdb";
 
 export default function SlideAfterSearch({ data, handleNewSlide }) {
   return (
@@ -16,7 +16,7 @@ export default function SlideAfterSearch({ data, handleNewSlide }) {
         <td className="sm:p-3 py-2 px-1 w-1/4 border-b border-gray-200 dark:border-gray-600">
           <div className="flex items-center">
             <Link to={`/movie/${data.id}`} className="imageContainer" target="_blank">
-              <img className="w-20" src={tmdbBaseURL + data.poster_path} alt={data.original_name || data.title} />
+              <img className="w-20" src={TMDB_IMG_SM + data.poster_path} alt={data.original_name || data.title} loading="lazy" decoding="async" />
             </Link>
           </div>
         </td>
@@ -36,7 +36,7 @@ export default function SlideAfterSearch({ data, handleNewSlide }) {
         <td>
           <div className="w-1/3 aspect-w-1 aspect-h-1">
             <Link to={`/movie/${data.id}`} className="imageContainer" target="_blank">
-              <img className="w-20" src={tmdbBaseURL + data.poster_path} alt={data.original_name || data.title} />
+              <img className="w-20" src={TMDB_IMG_SM + data.poster_path} alt={data.original_name || data.title} loading="lazy" decoding="async" />
             </Link>
           </div>
         </td>

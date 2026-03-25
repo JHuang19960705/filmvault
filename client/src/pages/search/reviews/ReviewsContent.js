@@ -4,7 +4,7 @@ import ContentService from "../../../services/content.service";
 import Loader from "../../../components/Loader";
 import { useUser } from "../../../context/UserContext";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_MD } from "../../../utils/tmdb";
 
 export default function ReviewsContent() {
   const { currentUser } = useUser();
@@ -98,7 +98,7 @@ export default function ReviewsContent() {
             <div className="blog-article">
               <div className="blog-article-content">
                 <div className="blog-articale-pic">
-                  <img src={tmdbBaseURL + contentData[last].TMDBImg} alt="" />
+                  <img src={TMDB_IMG_MD + contentData[last].TMDBImg} alt="" loading="lazy" decoding="async" />
                 </div>
                 <div className="blog-articale-paragraph">
                   {contentData[last].content}

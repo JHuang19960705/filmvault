@@ -1,6 +1,6 @@
 import React from "react";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_LG } from "../../../utils/tmdb";
 
 // 顯示影片資訊的組件
 export default function Information({ videoAll }) {
@@ -8,7 +8,7 @@ export default function Information({ videoAll }) {
         <div>
             {/* 影片圖片 */}
             <div className="movie-pic">
-                <img src={videoAll.backdrop_path && tmdbBaseURL + videoAll.backdrop_path} alt="影片圖片" />
+                <img src={videoAll.backdrop_path && TMDB_IMG_LG + videoAll.backdrop_path} alt="影片圖片" loading="lazy" decoding="async" />
             </div>
             {/* 影片標題 */}
             <div className="movie-title">
@@ -40,7 +40,7 @@ export default function Information({ videoAll }) {
                     {/* 影片播放連結 */}
                     <div className="movie-video">
                         <a className="movie-video-play">
-                            <img src={videoAll.backdrop_path && (tmdbBaseURL + videoAll.backdrop_path)} alt="影片背景" />
+                            <img src={videoAll.backdrop_path && (TMDB_IMG_LG + videoAll.backdrop_path)} alt="影片背景" loading="lazy" decoding="async" />
                         </a>
                     </div>
                     {/* 影片簡介 */}

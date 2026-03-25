@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_MD } from "../../../../utils/tmdb";
 
 export default function Cast({ castId, setOldCast, handleChangeOpen1 }) {
   const [isLoading, setLoading] = useState(true);
@@ -53,7 +53,7 @@ export default function Cast({ castId, setOldCast, handleChangeOpen1 }) {
           <div className="archive_content">
             <div className="archive_col1">
               <div>
-                {cast.profile_path && <a><img src={tmdbBaseURL + cast.profile_path} /></a>}
+                {cast.profile_path && <a><img src={TMDB_IMG_MD + cast.profile_path} loading="lazy" decoding="async" /></a>}
               </div>
               <h3 className="archive_title">
                 {cast.also_known_as && <div className="jp">{cast.also_known_as[0]}</div>}
@@ -63,7 +63,7 @@ export default function Cast({ castId, setOldCast, handleChangeOpen1 }) {
             </div>
             <div className="archive_col2">
               {castVideoImg && castVideoImg.slice(0, 4).map((img) => {
-                return (<img key={img.id} src={tmdbBaseURL + img.poster_path} />)
+                return (<img key={img.id} src={TMDB_IMG_MD + img.poster_path} loading="lazy" decoding="async" />)
               })}
             </div>
           </div>

@@ -4,7 +4,7 @@ import ContentService from "../../../services/content.service";
 import Loader from "../../../components/Loader";
 import { useUser } from "../../../context/UserContext";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_LG } from "../../../utils/tmdb";
 
 export default function PatchYourReview() {
   const { currentUser } = useUser();
@@ -89,7 +89,7 @@ export default function PatchYourReview() {
   return (
     <div className="box-border p-4 pb-8 md:p-8">
       {isLoading && <div>Loading...<Loader /></div>}
-      <img className="mb-5 rounded-2xl" src={tmdbBaseURL + reviewData.TMDBImg} alt={reviewData.title} />
+      <img className="mb-5 rounded-2xl" src={TMDB_IMG_LG + reviewData.TMDBImg} alt={reviewData.title} loading="lazy" decoding="async" />
       <div>
         <div className="mb-5 h-full">
           <label htmlFor="title"><div className="mb-2 ml-2 text-sm">標題</div></label>

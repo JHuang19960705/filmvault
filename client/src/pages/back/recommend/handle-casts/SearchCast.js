@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_SM } from "../../../../utils/tmdb";
 
 export default function SearchCast({ setNewCast, handleChangeClose1, handleChangeOpen2 }) {
   const [data, setData] = useState(null);
@@ -63,7 +63,7 @@ export default function SearchCast({ setNewCast, handleChangeClose1, handleChang
                       <td className="sm:p-3 py-2 px-1 w-1/4 border-b border-gray-200 dark:border-gray-800">
                         <div className="flex items-center">
                           <a className="imageContainer">
-                            <img className="w-20" src={tmdbBaseURL + d.profile_path} alt={d.name} />
+                            <img className="w-20" src={TMDB_IMG_SM + d.profile_path} alt={d.name} loading="lazy" decoding="async" />
                           </a>
                         </div>
                       </td>
@@ -95,7 +95,7 @@ export default function SearchCast({ setNewCast, handleChangeClose1, handleChang
                     <div key={d.id} className="mb-5 flex justify-around items-center border-b pb-5 md:hidden">
                       <div className="w-1/3">
                         <div className="aspect-w-1 aspect-h-1 w-full">
-                          <img src={tmdbBaseURL + d.profile_path} alt={d.name} className="bg-white text-gray-700 hover:bg-gray-100 py-1 px-2 rounded-sm text-sm object-cover" />
+                          <img src={TMDB_IMG_SM + d.profile_path} alt={d.name} className="bg-white text-gray-700 hover:bg-gray-100 py-1 px-2 rounded-sm text-sm object-cover" loading="lazy" decoding="async" />
                         </div>
                       </div>
                       <div className="pl-4">

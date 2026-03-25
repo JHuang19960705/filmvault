@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { TMDB_IMG_MD } from "../../../../utils/tmdb";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
 
 export default function BestChoose({ userRecommend }) {
-  const [personVideo, setPersonVideo] = useState(null);
-  const [personDetail, setPersonDetail] = useState(null);
+  const personId = userRecommend?.favoritePerson;
 
-  useEffect(() => {
-    if (userRecommend) {
-      const personVideoURL = `https://api.themoviedb.org/3/person/${userRecommend.favoritePerson}/combined_credits?&api_key=${API_KEY}`;
-      const personDetailURL = `https://api.themoviedb.org/3/person/${userRecommend.favoritePerson}?api_key=${API_KEY}`;
-      searchAll(personVideoURL, personDetailURL);
-    }
-  }, [userRecommend]);
+  const { data: personVideo } = useQuery({
+    queryKey: ["person-credits", personId],
+    queryFn: () =>
+      axios
+        .get(`https://api.themoviedb.org/3/person/${personId}/combined_credits?&api_key=${API_KEY}`)
+        .then((r) => r.data.cast),
+    enabled: !!personId,
+  });
 
-  const searchAll = async (URL1, URL2) => {
-    let result1 = await axios.get(URL1);
-    let result2 = await axios.get(URL2);
-    setPersonVideo(result1.data.cast);
-    setPersonDetail(result2.data);
-  };
+  const { data: personDetail } = useQuery({
+    queryKey: ["person-detail", personId],
+    queryFn: () =>
+      axios
+        .get(`https://api.themoviedb.org/3/person/${personId}?api_key=${API_KEY}`)
+        .then((r) => r.data),
+    enabled: !!personId,
+  });
 
   return (
     <div className="best-wrap">
@@ -45,7 +48,7 @@ export default function BestChoose({ userRecommend }) {
                 if (Video.poster_path) {
                   return (
                     <button className="best-pic">
-                      {<img src={tmdbBaseURL + Video.poster_path} draggable="false" />}
+                      {<img src={TMDB_IMG_MD + Video.poster_path} draggable="false" loading="lazy" decoding="async" />}
                     </button>
                   )
                 }

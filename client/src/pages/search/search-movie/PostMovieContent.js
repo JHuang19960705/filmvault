@@ -5,7 +5,7 @@ import axios from "axios";
 import Loader from "../../../components/Loader";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_LG } from "../../../utils/tmdb";
 
 export default function PostMovieContent () {
   const { TMDBId } = useParams(); // 從URL中獲取TMDBId
@@ -68,7 +68,7 @@ export default function PostMovieContent () {
       <div className="box-border p-4 pb-8 md:p-8">
         {isLoading && <div>Loading...<Loader /></div>}
         {/* 顯示TMDB圖片 */}
-        <img className="mb-5 rounded-2xl" src={ tmdbBaseURL + TMDBImg} />
+        <img className="mb-5 rounded-2xl" src={TMDB_IMG_LG + TMDBImg} loading="lazy" decoding="async" />
         <div>
           <div className="mb-5 h-full">
             {/* 輸入標題 */}

@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 
-const tmdbBaseURL = "https://image.tmdb.org/t/p/original";
+import { TMDB_IMG_LG } from "../../../../utils/tmdb";
 
 export default function Slide({ userRecommend }) {
   const slider = React.useRef(null);
@@ -21,7 +21,7 @@ export default function Slide({ userRecommend }) {
     backdropElements = userRecommend.slide.tmdbImgBackdrop.map((backdrop, index) => {
       return (
         <div key={index}>
-          <img src={tmdbBaseURL + backdrop} style={{ width: "100%", margin: "auto" }} />
+          <img src={TMDB_IMG_LG + backdrop} style={{ width: "100%", margin: "auto" }} loading="lazy" decoding="async" />
         </div>
       );
     });
