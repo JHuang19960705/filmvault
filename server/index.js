@@ -41,6 +41,10 @@ app.get("/" , (req, res) => {
   res.json("HELLO");
 })
 
-app.listen(port, () => {
-  console.log("server is listening port 3999...");
-});
+if (process.env.VERCEL !== "1") {
+  app.listen(port, () => {
+    console.log("server is listening port 3999...");
+  });
+}
+
+module.exports = app;

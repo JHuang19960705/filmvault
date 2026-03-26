@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { TMDB_IMG_MD } from "../../../../utils/tmdb";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-import { TMDB_IMG_MD } from "../../../../utils/tmdb";
 
 export default function Cast({ castId, setOldCast, handleChangeOpen1 }) {
   const [isLoading, setLoading] = useState(true);

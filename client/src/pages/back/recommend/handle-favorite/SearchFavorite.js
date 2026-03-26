@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { TMDB_IMG_SM } from "../../../../utils/tmdb";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-import { TMDB_IMG_SM } from "../../../../utils/tmdb";
 
 export default function SearchFavorite({ setNewFavorite, handleChangeClose1, handleChangeOpen2 }) {
   const [data, setData] = useState(null);

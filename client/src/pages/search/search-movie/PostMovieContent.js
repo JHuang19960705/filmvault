@@ -3,9 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import ContentService from "../../../services/content.service";
 import axios from "axios";
 import Loader from "../../../components/Loader";
+import { TMDB_IMG_LG } from "../../../utils/tmdb";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-import { TMDB_IMG_LG } from "../../../utils/tmdb";
 
 export default function PostMovieContent () {
   const { TMDBId } = useParams(); // 從URL中獲取TMDBId

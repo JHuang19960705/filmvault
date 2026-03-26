@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ContentService from "../../../services/content.service"; 
+import ContentService from "../../../services/content.service";
 import axios from "axios";
 import Loader from "../../../components/Loader";
-
-const API_KEY = process.env.REACT_APP_API_KEY; 
 import { TMDB_IMG_LG } from "../../../utils/tmdb";
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function PostTVContent () {
   const { TMDBId } = useParams(); // 從URL中獲取TMDBId
