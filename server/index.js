@@ -12,22 +12,30 @@ const cors = require("cors");
 const port = 3999;
 
 
-// mongoDB
-// MONGODB_LOCALHOST
-// MONGODB_CONNECTION
-mongoose
-  .connect(process.env.MONGODB_CONNECTION)
-  .then(() => {
-    console.log("Connecting to mongodDB...");
-  })
-  .catch((e) => {
-    console.log(e);
-  }); 
+// mongoDB — serverless-safe connection caching
+let isConnected = false;
+async function connectDB() {
+  if (isConnected) return;
+  await mongoose.connect(process.env.MONGODB_CONNECTION, {
+    serverSelectionTimeoutMS: 10000,
+    bufferCommands: false,
+  });
+  isConnected = true;
+}
 
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:3000" }));
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (e) {
+    console.error("MongoDB connection error:", e);
+    res.status(500).send("資料庫連線失敗，請稍後再試。");
+  }
+});
 
 app.use("/api/user", authRoute);
 //要進去必須先登入
